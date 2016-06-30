@@ -26,8 +26,4 @@ dependencies {
     compile 'com.android.support:design:23.4.0'
     compile 'me.dm7.barcodescanner:zbar:1.8.4'
     compile 'com.github.satyan:sugar:1.4'
-    //Lollipin
-    compile ('com.github.orangegangsters:lollipin:1.9.4@aar') {
-        transitive = true
-    }
 }

@@ -12,8 +12,7 @@
     tools:context="uk.co.richyhbm.coinbag.AccountsActivity"
     tools:showIn="@layout/activity_accounts">
 
-    <TextView
+    <ListView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_height="wrap_content" />
 </RelativeLayout>

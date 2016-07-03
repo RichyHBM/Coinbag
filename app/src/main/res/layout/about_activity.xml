@@ -10,12 +10,18 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="124dp"
+            android:layout_height="64dp"
             android:id="@+id/icon"
             android:layout_gravity="center"
-            android:layout_margin="6dp"
-            android:padding="10dp"
-            android:src="@drawable/coin_bag" />
+            android:src="@drawable/coin_bag"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="0dp"
+            android:paddingLeft="2dp"
+            android:paddingTop="2dp"
+            android:paddingRight="2dp"
+            android:nestedScrollingEnabled="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -25,7 +31,89 @@
             android:id="@+id/app_name"
             android:layout_gravity="center_horizontal"
             android:textStyle="bold"
-            android:textSize="36dp" />
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/developed_by"
+            android:id="@+id/developed_by"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:textColorLink="@color/material_grey_600" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/_3rd_party_libraries"
+                android:id="@+id/textView" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/dm77_bc"
+                android:id="@+id/dm77_barcode"
+                android:clickable="false"
+                android:textStyle="bold"
+                android:layout_margin="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/dm77_bc_license"
+                android:id="@+id/dm77_barcode_license"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="10dp"
+                android:textColorLink="@color/material_grey_600" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/sugar_orm"
+                android:id="@+id/sugar_orm"
+                android:clickable="false"
+                android:textStyle="bold"
+                android:layout_margin="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/sugar_license"
+                android:id="@+id/sugar_orm_license"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="10dp"
+                android:textColorLink="@color/material_grey_600" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </ScrollView>

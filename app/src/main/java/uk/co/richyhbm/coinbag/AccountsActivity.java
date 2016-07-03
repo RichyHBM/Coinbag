@@ -1,5 +1,6 @@
 package uk.co.richyhbm.coinbag;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -48,6 +49,8 @@ public class AccountsActivity extends AppCompatActivity {
         }
 
         if (id == R.id.action_about) {
+            Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
             return true;
         }
 

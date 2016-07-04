@@ -2,22 +2,11 @@ package uk.co.richyhbm.coinbag;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar.*;
+import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 public class AboutActivity extends AppCompatActivity implements View.OnClickListener {
@@ -48,7 +37,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
 
     private void initHyperlinks() {
         //Elements that have a hyper link in them
-        int data[] = {R.id.developed_by, R.id.dm77_barcode_license, R.id.sugar_orm_license};
+        int data[] = {R.id.developed_by, R.id.ja_bc_license, R.id.zxing_license, R.id.sugar_orm_license};
         for (int aData : data) {
             TextView text = (TextView) findViewById(aData);
             if(text != null) {

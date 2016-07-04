@@ -132,8 +132,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/dm77_bc"
-                android:id="@+id/dm77_barcode"
+                android:text="@string/ja_bc"
+                android:id="@+id/ja_bc"
                 android:clickable="false"
                 android:textStyle="bold"
                 android:layout_margin="5dp" />
@@ -142,8 +142,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/dm77_bc_license"
-                android:id="@+id/dm77_barcode_license"
+                android:text="@string/ja_bc_license"
+                android:id="@+id/ja_bc_license"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="10dp"
+                android:textColorLink="@color/material_grey_600" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/zxing"
+                android:id="@+id/zxing"
+                android:clickable="false"
+                android:textStyle="bold"
+                android:layout_margin="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/zxing_license"
+                android:id="@+id/zxing_license"
                 android:layout_margin="5dp"
                 android:layout_marginLeft="10dp"
                 android:textColorLink="@color/material_grey_600" />

@@ -6,7 +6,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:padding="5dp">
 
         <ImageView
             android:layout_width="match_parent"
@@ -36,12 +37,77 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Small Text"
+            android:id="@+id/app_version"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/developed_by"
             android:id="@+id/developed_by"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:textColorLink="@color/material_grey_600" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/donations"
+                android:id="@+id/donate"
+                android:padding="5dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:id="@+id/bitcoin_donate"
+                    android:src="@drawable/bitcoin"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:clickable="true" />
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:id="@+id/litecoin_donate"
+                    android:src="@drawable/litecoin"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:clickable="true" />
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:id="@+id/ethereum_donate"
+                    android:src="@drawable/etherium"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:clickable="true" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginTop="5dp" />
+        </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"

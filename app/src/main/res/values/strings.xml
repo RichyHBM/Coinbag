@@ -13,4 +13,5 @@
     <string name="dm77_bc_license">Released under <a href="https://raw.githubusercontent.com/dm77/barcodescanner/master/LICENSE">Apache 2.0 license</a></string>
     <string name="sugar_orm">Sugar ORM</string>
     <string name="sugar_license">Released under <a href="https://raw.githubusercontent.com/satyan/sugar/master/LICENSE">MIT license</a></string>
+    <string name="donations">Please feel free to donate</string>
 </resources>

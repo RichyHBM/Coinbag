@@ -27,9 +27,12 @@
         <activity
             android:name=".AboutActivity"
             android:parentActivityName=".AccountsActivity" />
+        <activity
+            android:name=".DonateActivity"
+            android:parentActivityName=".AboutActivity" />
 
-        <activity android:name=".DonateActivity"
-            android:parentActivityName=".AboutActivity"/>
+        <activity android:name=".PhotoActivity"
+            android:parentActivityName=".AccountsActivity" ></activity>
     </application>
 
 </manifest>

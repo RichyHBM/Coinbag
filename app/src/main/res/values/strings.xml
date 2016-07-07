@@ -22,4 +22,5 @@
     <string name="cryptocoin_icon">Cryptocurrency icons</string>
     <string name="cryptocoin_icon_license">Owned by the respective creators of each currency</string>
     <string name="donations">Please feel free to donate</string>
+    <string name="type_of_cryptocoin">Type of cryptocoin</string>
 </resources>

@@ -9,8 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AccountsActivity extends AppCompatActivity {
+    WalletAdapter walletAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,19 @@ public class AccountsActivity extends AppCompatActivity {
                 startActivity(photoIntent);
             }
         });
+
+        List<Wallet> arrayOfWallet = Wallet.listAll(Wallet.class);
+        walletAdapter = new WalletAdapter(this, arrayOfWallet);
+        ListView listView = (ListView) findViewById(R.id.wallet_list);
+        listView.setAdapter(walletAdapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        List<Wallet> arrayOfWallet = Wallet.listAll(Wallet.class);
+        walletAdapter.clear();
+        walletAdapter.addAll(arrayOfWallet);
     }
 
     @Override

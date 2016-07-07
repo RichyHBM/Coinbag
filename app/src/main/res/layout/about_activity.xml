@@ -62,17 +62,42 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/description"
+                android:id="@+id/description"
+                android:layout_margin="5dp"
+                android:textColorLink="@color/material_grey_600" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/donations"
-                android:id="@+id/donate"
-                android:padding="5dp" />
+                android:id="@+id/donate" />
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_gravity="center_horizontal">
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp">
 
                 <ImageView
                     android:layout_width="48dp"
@@ -123,10 +148,6 @@
                 android:text="@string/_3rd_party_libraries"
                 android:id="@+id/textView" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -194,6 +215,56 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/sugar_license"
                 android:id="@+id/sugar_orm_license"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="10dp"
+                android:textColorLink="@color/material_grey_600" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/coin_bag_icon"
+                android:id="@+id/coin_bag_icon"
+                android:clickable="false"
+                android:textStyle="bold"
+                android:layout_margin="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/coin_bag_icon_license"
+                android:id="@+id/coin_bag_icon_license"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="10dp"
+                android:textColorLink="@color/material_grey_600" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/cryptocoin_icon"
+                android:id="@+id/cryptocoin_icon"
+                android:clickable="false"
+                android:textStyle="bold"
+                android:layout_margin="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/cryptocoin_icon_license"
+                android:id="@+id/cryptocoin_icon_license"
                 android:layout_margin="5dp"
                 android:layout_marginLeft="10dp"
                 android:textColorLink="@color/material_grey_600" />

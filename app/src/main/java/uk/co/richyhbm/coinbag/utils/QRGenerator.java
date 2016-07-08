@@ -1,4 +1,4 @@
-package uk.co.richyhbm.coinbag;
+package uk.co.richyhbm.coinbag.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

@@ -1,19 +1,12 @@
-package uk.co.richyhbm.coinbag;
+package uk.co.richyhbm.coinbag.activities;
 
-import android.annotation.TargetApi;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.hardware.Camera;
-import android.hardware.camera2.CameraAccessException;
-import android.hardware.camera2.CameraCharacteristics;
-import android.hardware.camera2.CameraManager;
-import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -26,6 +19,11 @@ import com.google.zxing.integration.android.IntentResult;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import uk.co.richyhbm.coinbag.utils.QRGenerator;
+import uk.co.richyhbm.coinbag.R;
+import uk.co.richyhbm.coinbag.records.Wallet;
+import uk.co.richyhbm.coinbag.enums.CryptoCurrencies;
 
 public class NewWalletActivity extends AppCompatActivity {
     IntentIntegrator integrator;
@@ -60,7 +58,7 @@ public class NewWalletActivity extends AppCompatActivity {
     }
 
     protected void setupUI(final String address) {
-        setContentView(R.layout.add_account_activity);
+        setContentView(R.layout.add_account_layout);
 
         TextView addressPreview = (TextView)findViewById(R.id.address_preview);
         assert addressPreview != null;

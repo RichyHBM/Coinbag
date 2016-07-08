@@ -1,4 +1,4 @@
-package uk.co.richyhbm.coinbag;
+package uk.co.richyhbm.coinbag.activities;
 
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.zxing.WriterException;
+
+import uk.co.richyhbm.coinbag.utils.QRGenerator;
+import uk.co.richyhbm.coinbag.R;
+import uk.co.richyhbm.coinbag.enums.CryptoCurrencies;
 
 public class ReceiveActivity extends AppCompatActivity {
     public static final String ADDRESS_INTENT_EXTRA = "ADDRESS_INTENT_EXTRA";

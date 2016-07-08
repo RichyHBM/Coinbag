@@ -1,4 +1,4 @@
-package uk.co.richyhbm.coinbag;
+package uk.co.richyhbm.coinbag.activities;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,12 +9,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import uk.co.richyhbm.coinbag.R;
+import uk.co.richyhbm.coinbag.enums.DonationType;
+
 public class AboutActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.about_activity);
+        setContentView(R.layout.about_layout);
 
         initVersion();
         initHyperlinks();

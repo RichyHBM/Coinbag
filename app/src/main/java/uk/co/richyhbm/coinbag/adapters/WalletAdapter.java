@@ -1,7 +1,6 @@
-package uk.co.richyhbm.coinbag;
+package uk.co.richyhbm.coinbag.adapters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +8,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.zxing.WriterException;
-
 import java.util.List;
+
+import uk.co.richyhbm.coinbag.R;
+import uk.co.richyhbm.coinbag.records.Wallet;
 
 public class WalletAdapter extends ArrayAdapter<Wallet> {
     public WalletAdapter(Context context, List<Wallet> wallets) {
@@ -23,7 +23,7 @@ public class WalletAdapter extends ArrayAdapter<Wallet> {
         Wallet wallet = getItem(position);
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.account_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.wallet_item, parent, false);
         }
 
         ImageView icon = (ImageView)convertView.findViewById(R.id.icon);
@@ -35,10 +35,10 @@ public class WalletAdapter extends ArrayAdapter<Wallet> {
         TextView balance = (TextView) convertView.findViewById(R.id.balance);
 
         icon.setImageResource(wallet.getType().getIcon());
-        address.setText(wallet.address);
+        address.setText(wallet.getAddress());
         cointype.setText(wallet.getType().toString());
-        value.setText("$0");
-        balance.setText("12.543");
+        value.setText(wallet.getValue());
+        balance.setText(wallet.getBalance());
 
         return convertView;
     }

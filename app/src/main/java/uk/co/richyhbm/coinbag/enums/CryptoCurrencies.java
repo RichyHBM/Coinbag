@@ -1,4 +1,6 @@
-package uk.co.richyhbm.coinbag;
+package uk.co.richyhbm.coinbag.enums;
+
+import uk.co.richyhbm.coinbag.R;
 
 public enum CryptoCurrencies {
     Bitcoin(0),

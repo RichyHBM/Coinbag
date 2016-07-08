@@ -1,4 +1,4 @@
-package uk.co.richyhbm.coinbag;
+package uk.co.richyhbm.coinbag.enums;
 
 
 public enum DonationType {

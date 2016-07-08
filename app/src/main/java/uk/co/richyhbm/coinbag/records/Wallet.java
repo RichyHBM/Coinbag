@@ -1,9 +1,9 @@
-package uk.co.richyhbm.coinbag;
-
-import android.graphics.Bitmap;
+package uk.co.richyhbm.coinbag.records;
 
 import com.orm.SugarRecord;
 import com.orm.dsl.Unique;
+
+import uk.co.richyhbm.coinbag.enums.CryptoCurrencies;
 
 public class Wallet extends SugarRecord {
     @Unique
@@ -21,5 +21,17 @@ public class Wallet extends SugarRecord {
 
     public CryptoCurrencies getType() {
         return CryptoCurrencies.getFromValue(cryptoType);
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getBalance() {
+        return "";
+    }
+
+    public String getValue() {
+        return "";
     }
 }

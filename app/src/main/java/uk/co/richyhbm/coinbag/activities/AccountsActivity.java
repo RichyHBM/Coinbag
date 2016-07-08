@@ -1,4 +1,4 @@
-package uk.co.richyhbm.coinbag;
+package uk.co.richyhbm.coinbag.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,13 +14,17 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import uk.co.richyhbm.coinbag.R;
+import uk.co.richyhbm.coinbag.records.Wallet;
+import uk.co.richyhbm.coinbag.adapters.WalletAdapter;
+
 public class AccountsActivity extends AppCompatActivity {
     WalletAdapter walletAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.accounts_activity);
+        setContentView(R.layout.accounts_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -57,9 +61,7 @@ public class AccountsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        List<Wallet> arrayOfWallet = Wallet.listAll(Wallet.class);
-        walletAdapter.clear();
-        walletAdapter.addAll(arrayOfWallet);
+        resetListView();
     }
 
     @Override
@@ -77,6 +79,7 @@ public class AccountsActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_refresh) {
+            resetListView();
             return true;
         }
 
@@ -92,5 +95,11 @@ public class AccountsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void resetListView() {
+        List<Wallet> arrayOfWallet = Wallet.listAll(Wallet.class);
+        walletAdapter.clear();
+        walletAdapter.addAll(arrayOfWallet);
     }
 }

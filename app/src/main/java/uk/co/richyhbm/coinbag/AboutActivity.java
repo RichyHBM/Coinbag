@@ -68,17 +68,17 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         if(v.getId() == R.id.bitcoin_donate) {
             Intent intent = new Intent(this, DonateActivity.class);
-            intent.putExtra(DonateActivity.DONATION_TYPE_INTENT_EXTRA, DonationType.BITCOIN.ordinal());
+            intent.putExtra(DonateActivity.DONATION_TYPE_INTENT_EXTRA, DonationType.BITCOIN.getValue());
             startActivity(intent);
         }
         else if(v.getId() == R.id.litecoin_donate) {
             Intent intent = new Intent(this, DonateActivity.class);
-            intent.putExtra(DonateActivity.DONATION_TYPE_INTENT_EXTRA, DonationType.LITECOIN.ordinal());
+            intent.putExtra(DonateActivity.DONATION_TYPE_INTENT_EXTRA, DonationType.LITECOIN.getValue());
             startActivity(intent);
         }
         else if(v.getId() == R.id.ethereum_donate) {
             Intent intent = new Intent(this, DonateActivity.class);
-            intent.putExtra(DonateActivity.DONATION_TYPE_INTENT_EXTRA, DonationType.ETHEREUM.ordinal());
+            intent.putExtra(DonateActivity.DONATION_TYPE_INTENT_EXTRA, DonationType.ETHEREUM.getValue());
             startActivity(intent);
         }
     }

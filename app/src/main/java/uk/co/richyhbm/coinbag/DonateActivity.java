@@ -31,22 +31,9 @@ public class DonateActivity extends AppCompatActivity {
         int donationTypeInt = getIntent().getIntExtra(DONATION_TYPE_INTENT_EXTRA, -1);
 
         if(donationTypeInt != -1) {
-            DonationType TYPE = DonationType.values()[donationTypeInt];
-
-            switch (TYPE) {
-                case BITCOIN:
-                    typeDescription = "Donate via Bitcoin";
-                    address = "1234MSEYstWetqTFn5Au";
-                    break;
-                case LITECOIN:
-                    typeDescription = "Donate via Litecoin";
-                    address = "5678MSEYstWetqTFn5Au";
-                    break;
-                case ETHEREUM:
-                    typeDescription = "Donate via Ethereum";
-                    address = "9010MSEYstWetqTFn5Au";
-                    break;
-            }
+            DonationType ccType = DonationType.values()[donationTypeInt];
+            typeDescription = "Donate activity " + ccType.toString();
+            address = ccType.getAddress();
         }
 
         donationType.setText(typeDescription);

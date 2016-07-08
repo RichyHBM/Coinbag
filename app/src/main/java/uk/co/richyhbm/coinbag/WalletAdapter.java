@@ -26,17 +26,17 @@ public class WalletAdapter extends ArrayAdapter<Wallet> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.account_item, parent, false);
         }
 
-        ImageView qrCode = (ImageView)convertView.findViewById(R.id.icon);
-        assert qrCode != null;
+        ImageView icon = (ImageView)convertView.findViewById(R.id.icon);
+        assert icon != null;
 
         TextView address = (TextView) convertView.findViewById(R.id.address);
         TextView cointype = (TextView) convertView.findViewById(R.id.cointype);
         TextView value = (TextView) convertView.findViewById(R.id.value);
         TextView balance = (TextView) convertView.findViewById(R.id.balance);
 
-        qrCode.setImageBitmap(QRGenerator.fromBytes(wallet.qr_code));
+        icon.setImageResource(wallet.getType().getIcon());
         address.setText(wallet.address);
-        cointype.setText(wallet.type);
+        cointype.setText(wallet.getType().toString());
         value.setText("$0");
         balance.setText("12.543");
 

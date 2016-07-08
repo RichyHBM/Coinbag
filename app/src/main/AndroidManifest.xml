@@ -38,7 +38,7 @@
             android:name=".DonateActivity"
             android:parentActivityName=".AboutActivity" />
 
-        <activity android:name=".PhotoActivity"
+        <activity android:name=".NewWalletActivity"
             android:parentActivityName=".AccountsActivity" ></activity>
     </application>
 

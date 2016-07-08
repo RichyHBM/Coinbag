@@ -18,7 +18,7 @@
     <string name="sugar_orm">Sugar ORM</string>
     <string name="sugar_license">Released under <a href="https://raw.githubusercontent.com/satyan/sugar/master/LICENSE">MIT license</a></string>
     <string name="coin_bag_icon">Coin Bag icon</string>
-    <string name="coin_bag_icon_license">By Karthick Nagarajan via The Noun Project</string>
+    <string name="coin_bag_icon_license">By Karthick Nagarajan via <a href="https://thenounproject.com/">The Noun Project</a></string>
     <string name="cryptocoin_icon">Cryptocurrency icons</string>
     <string name="cryptocoin_icon_license">By Martin Allien via <a href="https://allienworks.net/">AllienWorks.net</a></string>
     <string name="donations">Please feel free to donate</string>

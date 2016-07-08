@@ -27,9 +27,8 @@ import com.google.zxing.integration.android.IntentResult;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhotoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class NewWalletActivity extends AppCompatActivity {
     IntentIntegrator integrator;
-    String addressType = CryptoCurrencies.values()[0].name();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +50,7 @@ public class PhotoActivity extends AppCompatActivity implements AdapterView.OnIt
         if(result != null) {
             if(result.getContents() == null) {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+                finish();
             } else {
                 setupUI(result.getContents());
             }
@@ -82,9 +82,7 @@ public class PhotoActivity extends AppCompatActivity implements AdapterView.OnIt
 
         List<String> spinnerArray =  new ArrayList<String>();
 
-        CryptoCurrencies[] currencies = CryptoCurrencies.values();
-        addressType = currencies[0].name();
-        for(CryptoCurrencies cc : currencies) {
+        for(CryptoCurrencies cc : CryptoCurrencies.values()) {
             spinnerArray.add(cc.name());
         }
 
@@ -93,31 +91,17 @@ public class PhotoActivity extends AppCompatActivity implements AdapterView.OnIt
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typePreview.setAdapter(adapter);
-        typePreview.setOnItemSelectedListener(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.save_new_account);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                byte[] bytes = null;
-                try {
-                    Bitmap qr = QRGenerator.qrFromString(address, 256, 256);
-                    bytes = QRGenerator.toBytes(qr);
-                } catch (WriterException we) {
-                    we.printStackTrace();
-                }
-                Wallet wallet = new Wallet(address, addressType, bytes);
+                CryptoCurrencies cc = CryptoCurrencies.valueOf(typePreview.getSelectedItem().toString());
+                Wallet wallet = new Wallet(address, cc);
                 wallet.save();
                 finish();
             }
         });
-    }
-
-    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-        addressType = parent.getItemAtPosition(pos).toString();
-    }
-
-    public void onNothingSelected(AdapterView parent) {
     }
 }

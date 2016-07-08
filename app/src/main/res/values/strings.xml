@@ -20,7 +20,7 @@
     <string name="coin_bag_icon">Coin Bag icon</string>
     <string name="coin_bag_icon_license">By Karthick Nagarajan via The Noun Project</string>
     <string name="cryptocoin_icon">Cryptocurrency icons</string>
-    <string name="cryptocoin_icon_license">Owned by the respective creators of each currency</string>
+    <string name="cryptocoin_icon_license">By Martin Allien via <a href="https://allienworks.net/">AllienWorks.net</a></string>
     <string name="donations">Please feel free to donate</string>
     <string name="type_of_cryptocoin">Type of cryptocoin</string>
 </resources>

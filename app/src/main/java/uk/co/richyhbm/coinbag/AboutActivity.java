@@ -37,7 +37,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
 
     private void initHyperlinks() {
         //Elements that have a hyper link in them
-        int data[] = {R.id.developed_by, R.id.ja_bc_license, R.id.zxing_license, R.id.sugar_orm_license};
+        int data[] = {R.id.developed_by, R.id.ja_bc_license, R.id.zxing_license, R.id.sugar_orm_license, R.id.cryptocoin_icon_license};
         for (int aData : data) {
             TextView text = (TextView) findViewById(aData);
             if(text != null) {

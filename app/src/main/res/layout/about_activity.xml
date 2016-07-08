@@ -103,28 +103,31 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:id="@+id/bitcoin_donate"
-                    android:src="@drawable/bitcoin"
+                    android:src="@drawable/btc_alt"
                     android:layout_marginLeft="32dp"
                     android:layout_marginRight="32dp"
-                    android:clickable="true" />
+                    android:clickable="true"
+                    android:tint="@android:color/black" />
 
                 <ImageView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:id="@+id/litecoin_donate"
-                    android:src="@drawable/litecoin"
+                    android:src="@drawable/ltc_alt"
                     android:layout_marginLeft="32dp"
                     android:layout_marginRight="32dp"
-                    android:clickable="true" />
+                    android:clickable="true"
+                    android:tint="@android:color/black" />
 
                 <ImageView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:id="@+id/ethereum_donate"
-                    android:src="@drawable/etherium"
+                    android:src="@drawable/eth"
                     android:layout_marginLeft="32dp"
                     android:layout_marginRight="32dp"
-                    android:clickable="true" />
+                    android:clickable="true"
+                    android:tint="@android:color/black" />
             </LinearLayout>
 
             <View

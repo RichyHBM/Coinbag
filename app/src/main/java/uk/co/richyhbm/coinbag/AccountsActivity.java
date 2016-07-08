@@ -8,7 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -32,10 +34,24 @@ public class AccountsActivity extends AppCompatActivity {
             }
         });
 
+
+        final Intent receiveIntent = new Intent(this, ReceiveActivity.class);
+
         List<Wallet> arrayOfWallet = Wallet.listAll(Wallet.class);
         walletAdapter = new WalletAdapter(this, arrayOfWallet);
         ListView listView = (ListView) findViewById(R.id.wallet_list);
         listView.setAdapter(walletAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView address = (TextView) view.findViewById(R.id.address);
+                TextView cointype = (TextView) view.findViewById(R.id.cointype);
+
+                receiveIntent.putExtra(ReceiveActivity.ADDRESS_INTENT_EXTRA, address.getText());
+                receiveIntent.putExtra(ReceiveActivity.CRYPTO_TYPE_INTENT_EXTRA, cointype.getText());
+                startActivity(receiveIntent);
+            }
+        });
     }
 
     @Override

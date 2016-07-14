@@ -27,4 +27,5 @@ dependencies {
     compile 'com.journeyapps:zxing-android-embedded:3.3.0@aar'
     compile 'com.google.zxing:core:3.2.1'
     compile 'com.github.satyan:sugar:1.4'
+    compile 'com.squareup.okhttp3:okhttp:3.4.0'
 }

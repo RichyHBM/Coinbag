@@ -3,6 +3,7 @@ package uk.co.richyhbm.coinbag.records;
 import com.orm.SugarRecord;
 import com.orm.dsl.Unique;
 
+import uk.co.richyhbm.coinbag.balances.Balance;
 import uk.co.richyhbm.coinbag.enums.CryptoCurrencies;
 
 public class Wallet extends SugarRecord {
@@ -28,6 +29,9 @@ public class Wallet extends SugarRecord {
     }
 
     public String getBalance() {
+        if(Balance.balanceFetchers.containsKey(getType())){
+            return Balance.balanceFetchers.get(getType()).getBalanceForAddress(address);
+        }
         return "";
     }
 

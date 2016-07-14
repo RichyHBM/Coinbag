@@ -2,22 +2,29 @@ package uk.co.richyhbm.coinbag.enums;
 
 import uk.co.richyhbm.coinbag.R;
 
-public enum CryptoCurrencies {
-    Bitcoin(0),
-    Litecoin(1),
-    Ethereum(2),
-    Dash(3),
-    Other(999);
+//TODO: Remove "value" and just use enum
 
+//Types of crypto currencies that have an image
+public enum CryptoCurrencies {
+    Other(0, R.drawable.coin_bag),
+    Bitcoin(1, R.drawable.btc),
+    Litecoin(2, R.drawable.ltc),
+    Ethereum(3, R.drawable.eth_alt),
+    Dash(4, R.drawable.dash);
+
+    //Use a value to assure crypto currency id's don't change
     private int value;
-    CryptoCurrencies(int i) {
+    private int iconId;
+    CryptoCurrencies(int i, int icon) {
         value = i;
+        iconId = icon;
     }
 
     public int getValue() {
         return value;
     }
 
+    //Converts an int to a crypto currency
     public static CryptoCurrencies getFromValue(int i) {
         for(CryptoCurrencies cc : CryptoCurrencies.values())
         {
@@ -27,19 +34,8 @@ public enum CryptoCurrencies {
         throw new IllegalArgumentException("CryptoCurrency " + i + " does not exist");
     }
 
+    //Returns the icon to use for the crypto currency
     public int getIcon() {
-        switch (this) {
-            case Bitcoin:
-                return R.drawable.btc;
-            case Litecoin:
-                return R.drawable.ltc;
-            case Ethereum:
-                return R.drawable.eth_alt;
-            case Dash:
-                return R.drawable.dash;
-            case Other:
-            default:
-                return R.drawable.coin_bag;
-        }
+        return iconId;
     }
 }

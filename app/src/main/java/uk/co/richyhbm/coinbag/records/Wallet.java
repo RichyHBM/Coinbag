@@ -6,10 +6,11 @@ import com.orm.dsl.Unique;
 import uk.co.richyhbm.coinbag.balances.Balance;
 import uk.co.richyhbm.coinbag.enums.CryptoCurrencies;
 
+//Wallet class, uses SugarORM to store in sqlite db
 public class Wallet extends SugarRecord {
     @Unique
     String address;
-    int cryptoType;
+    CryptoCurrencies cryptoType;
 
     public Wallet() {
 
@@ -17,20 +18,21 @@ public class Wallet extends SugarRecord {
 
     public Wallet(String address, CryptoCurrencies type){
         this.address = address;
-        this.cryptoType = type.getValue();
+        this.cryptoType = type;
     }
 
     public CryptoCurrencies getType() {
-        return CryptoCurrencies.getFromValue(cryptoType);
+        return cryptoType;
     }
 
     public String getAddress() {
         return address;
     }
 
+    //TODO: Create a class based off of AsyncTask that takes in a Wallet and returns balance or value
     public String getBalance() {
-        if(Balance.balanceFetchers.containsKey(getType())){
-            return Balance.balanceFetchers.get(getType()).getBalanceForAddress(address);
+        if(Balance.balanceFetchers.containsKey(cryptoType)){
+            return Balance.balanceFetchers.get(cryptoType).getBalanceForAddress(address);
         }
         return "";
     }

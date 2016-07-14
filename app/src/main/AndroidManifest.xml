@@ -26,7 +26,7 @@
             android:value="false" />
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
-            android:value="uk.co.richyhbm.coinbag" />
+            android:value="uk.co.richyhbm.coinbag.records" />
 
         <activity
             android:name=".activities.AccountsActivity"

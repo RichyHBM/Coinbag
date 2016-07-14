@@ -36,7 +36,7 @@ public class DonateActivity extends AppCompatActivity {
 
         if(donationTypeInt != -1) {
             DonationType ccType = DonationType.values()[donationTypeInt];
-            typeDescription = "Donate activity " + ccType.toString();
+            typeDescription = "Donate via " + ccType.toString();
             address = ccType.getAddress();
         }
 

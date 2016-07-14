@@ -11,6 +11,7 @@ import com.google.zxing.common.BitMatrix;
 
 import java.io.ByteArrayOutputStream;
 
+//TODO: Use AsyncTask to not run in same thread as UI
 public class QRGenerator {
     private static final int WIDTH = 1024;
     private static final int HEIGHT = 1024;

@@ -61,7 +61,6 @@
         android:singleLine="true"
         android:paddingRight="5dp"
         android:paddingEnd="5dp"
-        android:maxLength="12"
         android:text="@string/wallet_value"
         android:textSize="12sp" />
 

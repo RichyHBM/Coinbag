@@ -29,18 +29,4 @@ public class Wallet extends SugarRecord {
     public String getAddress() {
         return address;
     }
-
-    //Returns the balance of a wallet using the right API for that crypto type
-    //TODO: Create a class based off of AsyncTask that takes in a Wallet and returns balance or value
-    public String getBalance() {
-        if(Balance.balanceFetchers.containsKey(cryptoType)){
-            return Balance.balanceFetchers.get(cryptoType).getBalanceForAddress(address);
-        }
-        return "";
-    }
-
-    //Returns the current fiat value of the wallet
-    public String getValue() {
-        return "";
-    }
 }

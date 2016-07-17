@@ -1,6 +1,7 @@
 package uk.co.richyhbm.coinbag.adapters;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import uk.co.richyhbm.coinbag.R;
+import uk.co.richyhbm.coinbag.balances.Balance;
+import uk.co.richyhbm.coinbag.enums.CryptoCurrencies;
 import uk.co.richyhbm.coinbag.records.Wallet;
 
 //Array adapter for displaying all the wallets saved in the database
@@ -36,18 +39,48 @@ public class WalletAdapter extends ArrayAdapter<Wallet> {
         TextView cointype = (TextView) convertView.findViewById(R.id.cointype);
         assert cointype != null;
 
-        TextView value = (TextView) convertView.findViewById(R.id.value);
-        assert value != null;
+        final TextView valueTextView = (TextView) convertView.findViewById(R.id.value);
+        assert valueTextView != null;
 
-        TextView balance = (TextView) convertView.findViewById(R.id.balance);
-        assert balance != null;
+        final TextView balanceTextView = (TextView) convertView.findViewById(R.id.balance);
+        assert balanceTextView != null;
 
         //Set the default image for that wallets cryptocurrency type, and its information
         icon.setImageResource(wallet.getType().getIcon());
         address.setText(wallet.getAddress());
         cointype.setText(wallet.getType().toString());
-        value.setText(wallet.getValue());
-        balance.setText(wallet.getBalance());
+
+        AsyncTask<Wallet, Void, String> balanceAsyncTask = new AsyncTask<Wallet, Void, String>() {
+            @Override
+            protected String doInBackground(Wallet... params) {
+                String balance = "Unknown balance";
+                Wallet wallet = params[0];
+                CryptoCurrencies cryptoType = wallet.getType();
+                if(Balance.balanceFetchers.containsKey(cryptoType)) {
+                    balance = Balance.balanceFetchers.get(cryptoType).getBalanceForAddress(wallet.getAddress());
+                }
+                return balance;
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                balanceTextView.setText(result);
+            }
+        };
+        AsyncTask<Wallet, Void, String> valueAsyncTask = new AsyncTask<Wallet, Void, String>() {
+            @Override
+            protected String doInBackground(Wallet... params) {
+                return "Unknown value";
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                valueTextView.setText(result);
+            }
+        };
+
+        balanceAsyncTask.execute(wallet);
+        valueAsyncTask.execute(wallet);
 
         return convertView;
     }

@@ -15,7 +15,7 @@
         android:layout_marginEnd="6dip"
         android:padding="2dp"
         android:contentDescription="@string/wallet_preview"
-        android:src="@drawable/qr"/>
+        android:src="@drawable/coin_bag"/>
 
     <TextView
         android:id="@+id/address"

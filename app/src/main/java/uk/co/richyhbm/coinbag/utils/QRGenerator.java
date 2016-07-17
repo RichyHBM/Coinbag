@@ -3,6 +3,7 @@ package uk.co.richyhbm.coinbag.utils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.AsyncTask;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -10,31 +11,37 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
 import java.io.ByteArrayOutputStream;
+import java.security.InvalidParameterException;
+
+import uk.co.richyhbm.coinbag.interfaces.IAsyncResult;
 
 //Class for generating a QR code from a string
-//TODO: Use AsyncTask to not run in same thread as UI
-public class QRGenerator {
-    private static final int WIDTH = 1024;
-    private static final int HEIGHT = 1024;
+public class QRGenerator extends AsyncTask<QRData, Void, Bitmap> {
     //Background color, slightly gray
     private static final int BACKGROUND_COLOR = 0xfffafafa;
+    public IAsyncResult<Bitmap> asyncresult;
 
-    //Create a QR from a string at the default size
-    public static Bitmap qrFromString(String str) throws WriterException {
-        return qrFromString(str, WIDTH, HEIGHT);
-    }
+    @Override
+    protected Bitmap doInBackground(QRData... params) {
+        if(params.length != 1)
+            throw new InvalidParameterException("QR Generator needs just 1 set of data");
+        if(params[0].data.isEmpty())
+            return Bitmap.createBitmap(params[0].width, params[0].height, Bitmap.Config.ARGB_8888);
 
-    //Create a qr code from a string at a specified sized
-    public static Bitmap qrFromString(String str, int width, int height) throws WriterException {
+        String data = params[0].data;
+        int width = params[0].width;
+        int height = params[0].height;
+
         //Encode a string using zxing
         BitMatrix result;
         try {
-            result = new MultiFormatWriter().encode(str, BarcodeFormat.QR_CODE, width, height, null);
-        } catch (IllegalArgumentException iae) {
+            result = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, width, height, null);
+        } catch (WriterException we) {
             // Unsupported format
-            iae.printStackTrace();
+            we.printStackTrace();
             return Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         }
+
         //Write the encoded data into a java bitmap
         int w = result.getWidth();
         int h = result.getHeight();
@@ -46,9 +53,16 @@ public class QRGenerator {
                 pixels[offset + x] = result.get(x, y) ? Color.BLACK : BACKGROUND_COLOR;
             }
         }
+
         Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         bitmap.setPixels(pixels, 0, w, 0, 0, w, h);
         return bitmap;
+    }
+
+    @Override
+    protected void onPostExecute(Bitmap result) {
+        if(asyncresult != null)
+            asyncresult.processResult(result);
     }
 
     //Turns a byte array into a bitmap

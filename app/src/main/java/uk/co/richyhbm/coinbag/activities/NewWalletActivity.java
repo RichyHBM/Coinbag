@@ -20,14 +20,17 @@ import com.google.zxing.integration.android.IntentResult;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.richyhbm.coinbag.interfaces.IAsyncResult;
+import uk.co.richyhbm.coinbag.utils.QRData;
 import uk.co.richyhbm.coinbag.utils.QRGenerator;
 import uk.co.richyhbm.coinbag.R;
 import uk.co.richyhbm.coinbag.records.Wallet;
 import uk.co.richyhbm.coinbag.enums.CryptoCurrencies;
 
 //Activity for registering and adding a new wallet
-public class NewWalletActivity extends AppCompatActivity {
+public class NewWalletActivity extends AppCompatActivity implements IAsyncResult<Bitmap> {
     IntentIntegrator integrator;
+    ImageView qrCodePreview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,20 +69,19 @@ public class NewWalletActivity extends AppCompatActivity {
         TextView addressPreview = (TextView)findViewById(R.id.address_preview);
         assert addressPreview != null;
 
-        ImageView qrCodePreview = (ImageView)findViewById(R.id.qr_preview);
+        qrCodePreview = (ImageView)findViewById(R.id.qr_preview);
         assert qrCodePreview != null;
 
         final Spinner typePreview = (Spinner) findViewById(R.id.type_preview);
         assert typePreview != null;
 
         addressPreview.setText(address);
+
         //Create a qr image from the address
-        try {
-            Bitmap qr = QRGenerator.qrFromString(address);
-            qrCodePreview.setImageBitmap(qr);
-        } catch (WriterException we) {
-            we.printStackTrace();
-        }
+        QRGenerator qrGen = new QRGenerator();
+        qrGen.asyncresult = this;
+        qrGen.execute(new QRData(address));
+
         //Populate the dropdown of possible crypto currencies
         List<String> spinnerArray =  new ArrayList<String>();
 
@@ -105,5 +107,10 @@ public class NewWalletActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public void processResult(Bitmap result) {
+        qrCodePreview.setImageBitmap(result);
     }
 }

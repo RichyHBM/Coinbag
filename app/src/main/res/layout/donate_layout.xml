@@ -29,7 +29,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/donate_qr_address"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/qr"
         android:padding="20dp" />
 
 </LinearLayout>

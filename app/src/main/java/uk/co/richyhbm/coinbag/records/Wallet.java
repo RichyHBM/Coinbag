@@ -8,6 +8,7 @@ import uk.co.richyhbm.coinbag.enums.CryptoCurrencies;
 
 //Wallet class, uses SugarORM to store in sqlite db
 public class Wallet extends SugarRecord {
+    //Store the address and type of crypto currency of the wallet
     @Unique
     String address;
     CryptoCurrencies cryptoType;
@@ -29,6 +30,7 @@ public class Wallet extends SugarRecord {
         return address;
     }
 
+    //Returns the balance of a wallet using the right API for that crypto type
     //TODO: Create a class based off of AsyncTask that takes in a Wallet and returns balance or value
     public String getBalance() {
         if(Balance.balanceFetchers.containsKey(cryptoType)){
@@ -37,6 +39,7 @@ public class Wallet extends SugarRecord {
         return "";
     }
 
+    //Returns the current fiat value of the wallet
     public String getValue() {
         return "";
     }

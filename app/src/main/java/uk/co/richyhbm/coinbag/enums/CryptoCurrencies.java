@@ -12,7 +12,7 @@ public enum CryptoCurrencies {
     Ethereum(3, R.drawable.eth_alt),
     Dash(4, R.drawable.dash);
 
-    //Use a value to assure crypto currency id's don't change
+    //Use a value to assure crypto currency id's don't change, store the image to use with the enum
     private int value;
     private int iconId;
     CryptoCurrencies(int i, int icon) {

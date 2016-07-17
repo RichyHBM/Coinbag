@@ -13,6 +13,7 @@ import java.util.List;
 import uk.co.richyhbm.coinbag.R;
 import uk.co.richyhbm.coinbag.records.Wallet;
 
+//Array adapter for displaying all the wallets saved in the database
 public class WalletAdapter extends ArrayAdapter<Wallet> {
     public WalletAdapter(Context context, List<Wallet> wallets) {
         super(context, 0, wallets);
@@ -30,10 +31,18 @@ public class WalletAdapter extends ArrayAdapter<Wallet> {
         assert icon != null;
 
         TextView address = (TextView) convertView.findViewById(R.id.address);
-        TextView cointype = (TextView) convertView.findViewById(R.id.cointype);
-        TextView value = (TextView) convertView.findViewById(R.id.value);
-        TextView balance = (TextView) convertView.findViewById(R.id.balance);
+        assert address != null;
 
+        TextView cointype = (TextView) convertView.findViewById(R.id.cointype);
+        assert cointype != null;
+
+        TextView value = (TextView) convertView.findViewById(R.id.value);
+        assert value != null;
+
+        TextView balance = (TextView) convertView.findViewById(R.id.balance);
+        assert balance != null;
+
+        //Set the default image for that wallets cryptocurrency type, and its information
         icon.setImageResource(wallet.getType().getIcon());
         address.setText(wallet.getAddress());
         cointype.setText(wallet.getType().toString());

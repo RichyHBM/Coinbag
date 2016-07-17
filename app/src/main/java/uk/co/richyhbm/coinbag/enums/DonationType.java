@@ -6,6 +6,7 @@ public enum DonationType {
     LITECOIN(1, "5678MSEYstWetqTFn5Au"),
     ETHEREUM(2, "9010MSEYstWetqTFn5Au");
 
+    //Use a value to assure donation types id's don't change, store the address to use with the enum
     private int value;
     private String address;
     DonationType(int i, String address) {

@@ -25,12 +25,14 @@ import uk.co.richyhbm.coinbag.R;
 import uk.co.richyhbm.coinbag.records.Wallet;
 import uk.co.richyhbm.coinbag.enums.CryptoCurrencies;
 
+//Activity for registering and adding a new wallet
 public class NewWalletActivity extends AppCompatActivity {
     IntentIntegrator integrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //On creation of this activity, open the camera and parse a qr code
         integrator = new IntentIntegrator(this);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
         integrator.setPrompt("Scan your public key!");
@@ -41,7 +43,7 @@ public class NewWalletActivity extends AppCompatActivity {
         integrator.initiateScan();
     }
 
-    // Get the results:
+    // When a QR code is parsed, process the result
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -50,6 +52,7 @@ public class NewWalletActivity extends AppCompatActivity {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
                 finish();
             } else {
+                //Setup the UI with the parsed address
                 setupUI(result.getContents());
             }
         } else {
@@ -70,14 +73,14 @@ public class NewWalletActivity extends AppCompatActivity {
         assert typePreview != null;
 
         addressPreview.setText(address);
-
+        //Create a qr image from the address
         try {
             Bitmap qr = QRGenerator.qrFromString(address);
             qrCodePreview.setImageBitmap(qr);
         } catch (WriterException we) {
             we.printStackTrace();
         }
-
+        //Populate the dropdown of possible crypto currencies
         List<String> spinnerArray =  new ArrayList<String>();
 
         for(CryptoCurrencies cc : CryptoCurrencies.values()) {
@@ -89,8 +92,9 @@ public class NewWalletActivity extends AppCompatActivity {
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typePreview.setAdapter(adapter);
-
+        //Add the save floating button
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.save_new_account);
+        assert fab != null;
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

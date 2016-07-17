@@ -12,7 +12,9 @@ import uk.co.richyhbm.coinbag.utils.QRGenerator;
 import uk.co.richyhbm.coinbag.R;
 import uk.co.richyhbm.coinbag.enums.DonationType;
 
+//Activity for the donations page listing the address and a QR code for the address
 public class DonateActivity extends AppCompatActivity {
+    //Identifier for aditional information when creating the activity
     public static final String DONATION_TYPE_INTENT_EXTRA = "DONATION_TYPE_INTENT_EXTRA";
 
     @Override
@@ -32,6 +34,7 @@ public class DonateActivity extends AppCompatActivity {
         String typeDescription = "Donate activity failed";
         String address = "";
 
+        //Fetch the type of donation from the extras field, and set the text and image accordingly
         int donationTypeInt = getIntent().getIntExtra(DONATION_TYPE_INTENT_EXTRA, -1);
 
         if(donationTypeInt != -1) {

@@ -277,6 +277,56 @@
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/okhttp"
+                android:id="@+id/okhttp"
+                android:clickable="false"
+                android:textStyle="bold"
+                android:layout_margin="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/okhttp_license"
+                android:id="@+id/okhttp_license"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="10dp"
+                android:textColorLink="@color/material_grey_600" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/moshi"
+                android:id="@+id/moshi"
+                android:clickable="false"
+                android:textStyle="bold"
+                android:layout_margin="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/moshi_license"
+                android:id="@+id/moshi_license"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="10dp"
+                android:textColorLink="@color/material_grey_600" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
         </LinearLayout>
 
     </LinearLayout>

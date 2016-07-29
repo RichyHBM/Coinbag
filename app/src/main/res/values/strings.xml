@@ -23,4 +23,8 @@
     <string name="cryptocoin_icon_license">By Martin Allien via <a href="https://allienworks.net/">AllienWorks.net</a></string>
     <string name="donations">Please feel free to donate</string>
     <string name="type_of_cryptocoin">Type of cryptocoin</string>
+    <string name="okhttp">OkHttp</string>
+    <string name="okhttp_license">Released under <a href="https://raw.githubusercontent.com/square/okhttp/master/LICENSE.txt">Apache 2.0 license</a></string>
+    <string name="moshi">Moshi</string>
+    <string name="moshi_license">Released under <a href="https://raw.githubusercontent.com/square/moshi/master/LICENSE.txt">Apache 2.0 license</a></string>
 </resources>

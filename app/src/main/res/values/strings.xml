@@ -6,8 +6,8 @@
     <string name="wallet_preview">Wallet preview</string>
     <string name="example_address">1EzwoHtiXB4iFwed1234</string>
     <string name="coin_type">Bitcoin</string>
-    <string name="wallet_value">712 USD</string>
-    <string name="wallet_amount">1.80 BTC</string>
+    <string name="wallet_value"></string>
+    <string name="wallet_amount"></string>
     <string name="developed_by">Developed by <a href="https://twitter.com/richyhbm">@RichyHBM</a></string>
     <string name="description">Take your public cryptocoin wallet keys with you on the go, and safely receive payments without the danger of anyone spending your coins!\n\nSupports any kind of cryptocurrency, and for a select few, also display its balance and value.</string>
     <string name="_3rd_party_libraries">3rd Party Info:</string>

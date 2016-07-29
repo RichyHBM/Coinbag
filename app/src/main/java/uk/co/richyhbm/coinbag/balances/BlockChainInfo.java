@@ -4,6 +4,8 @@ package uk.co.richyhbm.coinbag.balances;
 import android.util.Log;
 
 import java.io.IOException;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 import okhttp3.Request;
 import okhttp3.Response;
@@ -15,7 +17,7 @@ public class BlockChainInfo extends Balance {
     }
 
     @Override
-    protected String getBalance(String address) throws IOException {
+    protected double getBalance(String address) throws IOException {
         //Fetches the address balance and returns it in BTC
         Request req = new Request.Builder().url("https://blockchain.info/q/addressbalance/" + address).build();
         Response res = client.newCall(req).execute();
@@ -23,9 +25,13 @@ public class BlockChainInfo extends Balance {
         try {
             Double satoshis = Double.parseDouble(s);
             Double btc = satoshis / 100000000.0;
-            return btc.toString() + " BTC";
+
+            DecimalFormat df = new DecimalFormat("#.########");
+            df.setRoundingMode(RoundingMode.CEILING);
+            return Double.parseDouble(df.format(btc));
         }catch(ArithmeticException ae) {
-            return ae.getMessage();
+            ae.printStackTrace();
+            return -1;
         }
     }
 }

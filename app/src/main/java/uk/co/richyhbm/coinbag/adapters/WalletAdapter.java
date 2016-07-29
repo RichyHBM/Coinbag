@@ -53,13 +53,14 @@ public class WalletAdapter extends ArrayAdapter<Wallet> {
         AsyncTask<Wallet, Void, String> balanceAsyncTask = new AsyncTask<Wallet, Void, String>() {
             @Override
             protected String doInBackground(Wallet... params) {
-                String balance = "Unknown balance";
                 Wallet wallet = params[0];
                 CryptoCurrencies cryptoType = wallet.getType();
                 if(Balance.balanceFetchers.containsKey(cryptoType)) {
-                    balance = Balance.balanceFetchers.get(cryptoType).getBalanceForAddress(wallet.getAddress());
+                    double blc = Balance.balanceFetchers.get(cryptoType).getBalanceForAddress(wallet.getAddress());
+                    if(blc >= 0) return blc + " " + cryptoType.getDenomination();
+                    else return "Unknown";
                 }
-                return balance;
+                return "Unknown";
             }
 
             @Override
@@ -70,7 +71,7 @@ public class WalletAdapter extends ArrayAdapter<Wallet> {
         AsyncTask<Wallet, Void, String> valueAsyncTask = new AsyncTask<Wallet, Void, String>() {
             @Override
             protected String doInBackground(Wallet... params) {
-                return "Unknown value";
+                return "Unknown";
             }
 
             @Override

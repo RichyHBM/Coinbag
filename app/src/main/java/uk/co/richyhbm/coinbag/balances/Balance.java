@@ -14,7 +14,7 @@ import uk.co.richyhbm.coinbag.enums.CryptoCurrencies;
 public abstract class Balance {
     public class CachedBalance {
         public Date nextRequestAt = new Date();
-        public String balance;
+        public double balance;
     }
 
     //Store a list of crypto type to balance fetcher
@@ -22,6 +22,7 @@ public abstract class Balance {
     static {
         balanceFetchers.put(CryptoCurrencies.Bitcoin, new BlockChainInfo());
         balanceFetchers.put(CryptoCurrencies.Ethereum, new EtherChain());
+        balanceFetchers.put(CryptoCurrencies.Litecoin, new LtcBlockr());
     }
 
     //Keep a cache so that the balances are only refreshed every X seconds at most
@@ -33,24 +34,24 @@ public abstract class Balance {
         this.rateLimitSeconds = rateLimitSeconds;
     }
 
-    public final String getBalanceForAddress(String address) {
+    public final double getBalanceForAddress(String address) {
         Date now = new Date();
         //Only fetch a new balance if the last time it was fetched was before X seconds, or it hasn't been fetched before
         if (!cachedBalances.containsKey(address) || now.after(cachedBalances.get(address).nextRequestAt)) {
             try {
-                String balance = getBalance(address);
+                double balance = getBalance(address);
                 CachedBalance cb = new CachedBalance();
                 cb.balance = balance;
                 cb.nextRequestAt.setTime(now.getTime() + rateLimitSeconds * 1000);
                 cachedBalances.put(address, cb);
             } catch (IOException ioe) {
                 ioe.printStackTrace();
-                return "";
+                return -1;
             }
         }
 
         return cachedBalances.get(address).balance;
     }
 
-    protected abstract String getBalance(String address) throws IOException;
+    protected abstract double getBalance(String address) throws IOException;
 }

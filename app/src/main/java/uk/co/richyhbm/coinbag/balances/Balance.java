@@ -21,6 +21,7 @@ public abstract class Balance {
     public static final HashMap<CryptoCurrencies, Balance> balanceFetchers = new HashMap<CryptoCurrencies, Balance>();
     static {
         balanceFetchers.put(CryptoCurrencies.Bitcoin, new BlockChainInfo());
+        balanceFetchers.put(CryptoCurrencies.Ethereum, new EtherChain());
     }
 
     //Keep a cache so that the balances are only refreshed every X seconds at most

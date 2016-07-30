@@ -10,7 +10,6 @@ import okhttp3.OkHttpClient;
 import uk.co.richyhbm.coinbag.enums.CryptoCurrencies;
 
 //Abstract class for defining a way to get a balance in a wallet
-//TODO: Use AsyncTask to not make requests on the main thread
 public abstract class Balance {
     public class CachedBalance {
         public Date nextRequestAt = new Date();
@@ -23,6 +22,7 @@ public abstract class Balance {
         balanceFetchers.put(CryptoCurrencies.Bitcoin, new BlockChainInfo());
         balanceFetchers.put(CryptoCurrencies.Ethereum, new EtherChain());
         balanceFetchers.put(CryptoCurrencies.Litecoin, new LtcBlockr());
+        balanceFetchers.put(CryptoCurrencies.Dash, new DashExplorer());
     }
 
     //Keep a cache so that the balances are only refreshed every X seconds at most

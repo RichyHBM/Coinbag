@@ -25,7 +25,7 @@ public class DashExplorer extends Balance {
             Double dash = Double.parseDouble(s);
 
             DecimalFormat df = new DecimalFormat("#.########");
-            df.setRoundingMode(RoundingMode.CEILING);
+            df.setRoundingMode(RoundingMode.HALF_DOWN);
             return Double.parseDouble(df.format(dash));
         }catch(ArithmeticException ae) {
             ae.printStackTrace();

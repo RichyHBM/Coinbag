@@ -32,7 +32,7 @@ public class EtherChain extends Balance {
             return -1;
 
         DecimalFormat df = new DecimalFormat("#.########");
-        df.setRoundingMode(RoundingMode.CEILING);
+        df.setRoundingMode(RoundingMode.HALF_DOWN);
         Double ether = ethResponse.data[0].balance * Math.pow(10, -18);
         return Double.parseDouble(df.format(ether));
     }

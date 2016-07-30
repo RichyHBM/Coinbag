@@ -31,7 +31,7 @@ public class LtcBlockr extends Balance {
             return -1;
 
         DecimalFormat df = new DecimalFormat("#.########");
-        df.setRoundingMode(RoundingMode.CEILING);
+        df.setRoundingMode(RoundingMode.HALF_DOWN);
         Double ether = ltcResponse.data.balance;
         return Double.parseDouble(df.format(ether));
     }

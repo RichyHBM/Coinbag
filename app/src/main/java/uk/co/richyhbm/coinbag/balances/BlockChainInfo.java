@@ -27,7 +27,7 @@ public class BlockChainInfo extends Balance {
             Double btc = satoshis / 100000000.0;
 
             DecimalFormat df = new DecimalFormat("#.########");
-            df.setRoundingMode(RoundingMode.CEILING);
+            df.setRoundingMode(RoundingMode.HALF_DOWN);
             return Double.parseDouble(df.format(btc));
         }catch(ArithmeticException ae) {
             ae.printStackTrace();

@@ -9,11 +9,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import uk.co.richyhbm.coinbag.R;
 import uk.co.richyhbm.coinbag.balances.Balance;
 import uk.co.richyhbm.coinbag.enums.CryptoCurrencies;
+import uk.co.richyhbm.coinbag.exchanges.Exchange;
 import uk.co.richyhbm.coinbag.records.Wallet;
 
 //Array adapter for displaying all the wallets saved in the database
@@ -71,6 +74,26 @@ public class WalletAdapter extends ArrayAdapter<Wallet> {
         AsyncTask<Wallet, Void, String> valueAsyncTask = new AsyncTask<Wallet, Void, String>() {
             @Override
             protected String doInBackground(Wallet... params) {
+                Wallet wallet = params[0];
+                CryptoCurrencies cryptoType = wallet.getType();
+                double balance = 0;
+                if(Balance.balanceFetchers.containsKey(cryptoType)) {
+                    double blc = Balance.balanceFetchers.get(cryptoType).getBalanceForAddress(wallet.getAddress());
+                    if(blc >= 0) balance =  blc;
+                    else return "Unknown";
+                } else return "Unknown";
+
+                if(Exchange.exchangeFetchers.containsKey(cryptoType)) {
+                    double usd = Exchange.exchangeFetchers.get(cryptoType).getExchangeForCurrency(cryptoType);
+                    if(usd >= 0) {
+                        double totalValue = (balance * usd);
+                        DecimalFormat df = new DecimalFormat("#.##");
+                        df.setRoundingMode(RoundingMode.HALF_DOWN);
+
+                        return Double.parseDouble(df.format(totalValue)) + " USD";
+                    }
+                }
+
                 return "Unknown";
             }
 

@@ -56,7 +56,9 @@ public class NewWalletActivity extends AppCompatActivity implements IAsyncResult
                 finish();
             } else {
                 //Setup the UI with the parsed address
-                setupUI(result.getContents());
+                String address = result.getContents();
+
+                setupUI(address.replaceAll("^.+:", ""));
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);

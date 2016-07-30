@@ -56,14 +56,19 @@ public class WalletAdapter extends ArrayAdapter<Wallet> {
         AsyncTask<Wallet, Void, String> balanceAsyncTask = new AsyncTask<Wallet, Void, String>() {
             @Override
             protected String doInBackground(Wallet... params) {
-                Wallet wallet = params[0];
-                CryptoCurrencies cryptoType = wallet.getType();
-                if(Balance.balanceFetchers.containsKey(cryptoType)) {
-                    double blc = Balance.balanceFetchers.get(cryptoType).getBalanceForAddress(wallet.getAddress());
-                    if(blc >= 0) return blc + " " + cryptoType.getDenomination();
-                    else return "Unknown";
+                try{
+                    Wallet wallet = params[0];
+                    CryptoCurrencies cryptoType = wallet.getType();
+                    if(Balance.balanceFetchers.containsKey(cryptoType)) {
+                        double blc = Balance.balanceFetchers.get(cryptoType).getBalanceForAddress(wallet.getAddress());
+                        if(blc >= 0) return blc + " " + cryptoType.getDenomination();
+                        else return "Unknown";
+                    }
+                    return "Unknown";
+                }catch(Exception e){
+                    e.printStackTrace();
+                    return "Error";
                 }
-                return "Unknown";
             }
 
             @Override
@@ -74,27 +79,32 @@ public class WalletAdapter extends ArrayAdapter<Wallet> {
         AsyncTask<Wallet, Void, String> valueAsyncTask = new AsyncTask<Wallet, Void, String>() {
             @Override
             protected String doInBackground(Wallet... params) {
-                Wallet wallet = params[0];
-                CryptoCurrencies cryptoType = wallet.getType();
-                double balance = 0;
-                if(Balance.balanceFetchers.containsKey(cryptoType)) {
-                    double blc = Balance.balanceFetchers.get(cryptoType).getBalanceForAddress(wallet.getAddress());
-                    if(blc >= 0) balance =  blc;
-                    else return "Unknown";
-                } else return "Unknown";
+                try {
+                    Wallet wallet = params[0];
+                    CryptoCurrencies cryptoType = wallet.getType();
+                    double balance = 0;
+                    if (Balance.balanceFetchers.containsKey(cryptoType)) {
+                        double blc = Balance.balanceFetchers.get(cryptoType).getBalanceForAddress(wallet.getAddress());
+                        if (blc >= 0) balance = blc;
+                        else return "Unknown";
+                    } else return "Unknown";
 
-                if(Exchange.exchangeFetchers.containsKey(cryptoType)) {
-                    double usd = Exchange.exchangeFetchers.get(cryptoType).getExchangeForCurrency(cryptoType);
-                    if(usd >= 0) {
-                        double totalValue = (balance * usd);
-                        DecimalFormat df = new DecimalFormat("#.##");
-                        df.setRoundingMode(RoundingMode.HALF_DOWN);
+                    if (Exchange.exchangeFetchers.containsKey(cryptoType)) {
+                        double usd = Exchange.exchangeFetchers.get(cryptoType).getExchangeForCurrency(cryptoType);
+                        if (usd >= 0) {
+                            double totalValue = (balance * usd);
+                            DecimalFormat df = new DecimalFormat("#.##");
+                            df.setRoundingMode(RoundingMode.HALF_DOWN);
 
-                        return Double.parseDouble(df.format(totalValue)) + " USD";
+                            return Double.parseDouble(df.format(totalValue)) + " USD";
+                        }
                     }
-                }
 
-                return "Unknown";
+                    return "Unknown";
+                }catch(Exception e){
+                    e.printStackTrace();
+                    return "Error";
+                }
             }
 
             @Override

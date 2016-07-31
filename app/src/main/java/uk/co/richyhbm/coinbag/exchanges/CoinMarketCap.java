@@ -1,5 +1,7 @@
 package uk.co.richyhbm.coinbag.exchanges;
 
+import android.util.Log;
+
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
@@ -33,11 +35,12 @@ public class CoinMarketCap extends Exchange {
         JsonAdapter<List<CoinMarketCapResponse>> jsonAdapter = moshi.adapter(listCoinMarketCapResponse);
 
         List<CoinMarketCapResponse> exchange = jsonAdapter.fromJson(res.body().string());
-        if(exchange == null)
+        if(exchange == null) {
             return 0;
+        }
 
         for (CoinMarketCapResponse cmr: exchange) {
-            if(cmr.symbol == cryptoType.getDenomination()) return cmr.price_usd;
+            if(cmr.symbol.equals(cryptoType.getDenomination())) return cmr.price_usd;
         }
 
         return 0;

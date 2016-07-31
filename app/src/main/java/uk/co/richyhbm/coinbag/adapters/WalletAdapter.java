@@ -2,6 +2,7 @@ package uk.co.richyhbm.coinbag.adapters;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,8 @@ public class WalletAdapter extends ArrayAdapter<Wallet> {
     public View getView(int position, View convertView, ViewGroup parent) {
         Wallet wallet = getItem(position);
 
+        final String walletAddres= wallet.getAddress();
+
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.wallet_item, parent, false);
         }
@@ -53,41 +56,46 @@ public class WalletAdapter extends ArrayAdapter<Wallet> {
         address.setText(wallet.getAddress());
         cointype.setText(wallet.getType().toString());
 
-        AsyncTask<Wallet, Void, String> balanceAsyncTask = new AsyncTask<Wallet, Void, String>() {
+        String calculating = "Calculating";
+        balanceTextView.setText(calculating);
+        valueTextView.setText(calculating);
+
+        AsyncTask<Wallet, Void, Pair<String, String>> balanceAsyncTask = new AsyncTask<Wallet, Void, Pair<String, String>>() {
             @Override
-            protected String doInBackground(Wallet... params) {
+            protected Pair<String, String> doInBackground(Wallet... params) {
+                Wallet wallet = params[0];
                 try{
-                    Wallet wallet = params[0];
                     CryptoCurrencies cryptoType = wallet.getType();
                     if(Balance.balanceFetchers.containsKey(cryptoType)) {
                         double blc = Balance.balanceFetchers.get(cryptoType).getBalanceForAddress(wallet.getAddress());
-                        if(blc >= 0) return blc + " " + cryptoType.getDenomination();
-                        else return "Unknown";
+                        if(blc >= 0) return new Pair<>(wallet.getAddress(), blc + " " + cryptoType.getDenomination());
+                        else return new Pair<>(wallet.getAddress(), "Unknown");
                     }
-                    return "Unknown";
+                    return new Pair<>(wallet.getAddress(), "Unknown");
                 }catch(Exception e){
                     e.printStackTrace();
-                    return "Error";
+                    return new Pair<>(wallet.getAddress(), "Error");
                 }
             }
 
             @Override
-            protected void onPostExecute(String result) {
-                balanceTextView.setText(result);
+            protected void onPostExecute(Pair<String, String> result) {
+                if(result.first == walletAddres)
+                    balanceTextView.setText(result.second);
             }
         };
-        AsyncTask<Wallet, Void, String> valueAsyncTask = new AsyncTask<Wallet, Void, String>() {
+        AsyncTask<Wallet, Void, Pair<String, String>> valueAsyncTask = new AsyncTask<Wallet, Void, Pair<String, String>>() {
             @Override
-            protected String doInBackground(Wallet... params) {
+            protected Pair<String, String> doInBackground(Wallet... params) {
+                Wallet wallet = params[0];
                 try {
-                    Wallet wallet = params[0];
                     CryptoCurrencies cryptoType = wallet.getType();
                     double balance = 0;
                     if (Balance.balanceFetchers.containsKey(cryptoType)) {
                         double blc = Balance.balanceFetchers.get(cryptoType).getBalanceForAddress(wallet.getAddress());
                         if (blc >= 0) balance = blc;
-                        else return "Unknown";
-                    } else return "Unknown";
+                        else return new Pair<>(wallet.getAddress(), "Unknown");
+                    } else return new Pair<>(wallet.getAddress(), "Unknown");
 
                     if (Exchange.exchangeFetchers.containsKey(cryptoType)) {
                         double usd = Exchange.exchangeFetchers.get(cryptoType).getExchangeForCurrency(cryptoType);
@@ -96,20 +104,21 @@ public class WalletAdapter extends ArrayAdapter<Wallet> {
                             DecimalFormat df = new DecimalFormat("#.##");
                             df.setRoundingMode(RoundingMode.HALF_DOWN);
 
-                            return Double.parseDouble(df.format(totalValue)) + " USD";
+                            return new Pair<>(wallet.getAddress(), Double.parseDouble(df.format(totalValue)) + " USD");
                         }
                     }
 
-                    return "Unknown";
+                    return new Pair<>(wallet.getAddress(), "Unknown");
                 }catch(Exception e){
                     e.printStackTrace();
-                    return "Error";
+                    return new Pair<>(wallet.getAddress(), "Error");
                 }
             }
 
             @Override
-            protected void onPostExecute(String result) {
-                valueTextView.setText(result);
+            protected void onPostExecute(Pair<String, String> result) {
+                if(result.first == walletAddres)
+                    valueTextView.setText(result.second);
             }
         };
 

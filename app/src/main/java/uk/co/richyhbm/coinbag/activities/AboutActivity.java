@@ -75,6 +75,11 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
         if(ethereumDonation != null) {
             ethereumDonation.setOnClickListener(this);
         }
+
+        ImageView dashDonation = (ImageView)findViewById(R.id.dash_donate);
+        if(dashDonation != null) {
+            dashDonation.setOnClickListener(this);
+        }
     }
 
     @Override
@@ -92,6 +97,11 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
         else if(v.getId() == R.id.ethereum_donate) {
             Intent intent = new Intent(this, DonateActivity.class);
             intent.putExtra(DonateActivity.DONATION_TYPE_INTENT_EXTRA, DonationType.ETHEREUM.getValue());
+            startActivity(intent);
+        }
+        else if(v.getId() == R.id.dash_donate) {
+            Intent intent = new Intent(this, DonateActivity.class);
+            intent.putExtra(DonateActivity.DONATION_TYPE_INTENT_EXTRA, DonationType.DASH.getValue());
             startActivity(intent);
         }
     }

@@ -15,7 +15,7 @@ import uk.co.richyhbm.coinbag.enums.CryptoCurrencies;
 public class BlockChain extends Exchange {
 
     public BlockChain() {
-        super(10);
+        super(60);
     }
 
     @Override

@@ -103,9 +103,9 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:id="@+id/bitcoin_donate"
-                    android:src="@drawable/btc_alt"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginRight="32dp"
+                    android:src="@drawable/btc"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:clickable="true"
                     android:tint="@android:color/black" />
 
@@ -113,9 +113,9 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:id="@+id/litecoin_donate"
-                    android:src="@drawable/ltc_alt"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginRight="32dp"
+                    android:src="@drawable/ltc"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:clickable="true"
                     android:tint="@android:color/black" />
 
@@ -123,9 +123,19 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:id="@+id/ethereum_donate"
-                    android:src="@drawable/eth"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginRight="32dp"
+                    android:src="@drawable/eth_alt"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:clickable="true"
+                    android:tint="@android:color/black" />
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:id="@+id/dash_donate"
+                    android:src="@drawable/dash"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:clickable="true"
                     android:tint="@android:color/black" />
             </LinearLayout>

@@ -22,6 +22,9 @@ public abstract class Exchange {
     public static final HashMap<CryptoCurrencies, Exchange> exchangeFetchers = new HashMap<CryptoCurrencies, Exchange>();
     static {
         exchangeFetchers.put(CryptoCurrencies.Bitcoin, new BlockChain());
+        exchangeFetchers.put(CryptoCurrencies.Litecoin, new CoinMarketCap(CryptoCurrencies.Litecoin));
+        exchangeFetchers.put(CryptoCurrencies.Ethereum, new CoinMarketCap(CryptoCurrencies.Ethereum));
+        exchangeFetchers.put(CryptoCurrencies.Dash, new CoinMarketCap(CryptoCurrencies.Dash));
     }
 
     //Keep a cache so that the balances are only refreshed every X seconds at most

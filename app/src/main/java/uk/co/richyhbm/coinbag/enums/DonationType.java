@@ -2,9 +2,10 @@ package uk.co.richyhbm.coinbag.enums;
 
 //Types of donations that are currently supported
 public enum DonationType {
-    BITCOIN(0, "1234MSEYstWetqTFn5Au"),
-    LITECOIN(1, "5678MSEYstWetqTFn5Au"),
-    ETHEREUM(2, "9010MSEYstWetqTFn5Au");
+    BITCOIN(0, "TEST_Bitcoin"),
+    LITECOIN(1, "TEST_Litecoin"),
+    ETHEREUM(2, "TEST_Ethereum"),
+    DASH(3, "TEST_Dash");
 
     //Use a value to assure donation types id's don't change, store the address to use with the enum
     private int value;

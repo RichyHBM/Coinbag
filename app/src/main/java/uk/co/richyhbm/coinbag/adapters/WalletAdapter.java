@@ -60,31 +60,7 @@ public class WalletAdapter extends ArrayAdapter<Wallet> {
         balanceTextView.setText(calculating);
         valueTextView.setText(calculating);
 
-        AsyncTask<Wallet, Void, Pair<String, String>> balanceAsyncTask = new AsyncTask<Wallet, Void, Pair<String, String>>() {
-            @Override
-            protected Pair<String, String> doInBackground(Wallet... params) {
-                Wallet wallet = params[0];
-                try{
-                    CryptoCurrencies cryptoType = wallet.getType();
-                    if(Balance.balanceFetchers.containsKey(cryptoType)) {
-                        double blc = Balance.balanceFetchers.get(cryptoType).getBalanceForAddress(wallet.getAddress());
-                        if(blc >= 0) return new Pair<>(wallet.getAddress(), blc + " " + cryptoType.getDenomination());
-                        else return new Pair<>(wallet.getAddress(), "Unknown");
-                    }
-                    return new Pair<>(wallet.getAddress(), "Unknown");
-                }catch(Exception e){
-                    e.printStackTrace();
-                    return new Pair<>(wallet.getAddress(), "Error");
-                }
-            }
-
-            @Override
-            protected void onPostExecute(Pair<String, String> result) {
-                if(result.first == walletAddres)
-                    balanceTextView.setText(result.second);
-            }
-        };
-        AsyncTask<Wallet, Void, Pair<String, String>> valueAsyncTask = new AsyncTask<Wallet, Void, Pair<String, String>>() {
+        AsyncTask<Wallet, Void, Pair<String, String>> asyncTask = new AsyncTask<Wallet, Void, Pair<String, String>>() {
             @Override
             protected Pair<String, String> doInBackground(Wallet... params) {
                 Wallet wallet = params[0];
@@ -94,8 +70,8 @@ public class WalletAdapter extends ArrayAdapter<Wallet> {
                     if (Balance.balanceFetchers.containsKey(cryptoType)) {
                         double blc = Balance.balanceFetchers.get(cryptoType).getBalanceForAddress(wallet.getAddress());
                         if (blc >= 0) balance = blc;
-                        else return new Pair<>(wallet.getAddress(), "Unknown");
-                    } else return new Pair<>(wallet.getAddress(), "Unknown");
+                        else return new Pair<>("Unknown", "Unknown");
+                    } else return new Pair<>("Unknown", "Unknown");
 
                     if (Exchange.exchangeFetchers.containsKey(cryptoType)) {
                         double usd = Exchange.exchangeFetchers.get(cryptoType).getExchangeForCurrency(cryptoType);
@@ -104,26 +80,27 @@ public class WalletAdapter extends ArrayAdapter<Wallet> {
                             DecimalFormat df = new DecimalFormat("#.##");
                             df.setRoundingMode(RoundingMode.HALF_DOWN);
 
-                            return new Pair<>(wallet.getAddress(), Double.parseDouble(df.format(totalValue)) + " USD");
+                            return new Pair<>(
+                                    balance + " " + cryptoType.getDenomination(),
+                                Double.parseDouble(df.format(totalValue)) + " USD");
                         }
                     }
 
-                    return new Pair<>(wallet.getAddress(), "Unknown");
+                    return new Pair<>(balance + " " + cryptoType.getDenomination(), "Unknown");
                 }catch(Exception e){
                     e.printStackTrace();
-                    return new Pair<>(wallet.getAddress(), "Error");
+                    return new Pair<>("Error", "Error");
                 }
             }
 
             @Override
             protected void onPostExecute(Pair<String, String> result) {
-                if(result.first == walletAddres)
-                    valueTextView.setText(result.second);
+                balanceTextView.setText(result.first);
+                valueTextView.setText(result.second);
             }
         };
 
-        balanceAsyncTask.execute(wallet);
-        valueAsyncTask.execute(wallet);
+        asyncTask.execute(wallet);
 
         return convertView;
     }

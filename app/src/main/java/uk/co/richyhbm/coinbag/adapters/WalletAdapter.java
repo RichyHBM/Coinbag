@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
+import java.util.Locale;
 
 import uk.co.richyhbm.coinbag.R;
 import uk.co.richyhbm.coinbag.balances.Balance;
@@ -73,20 +75,23 @@ public class WalletAdapter extends ArrayAdapter<Wallet> {
                         else return new Pair<>("Unknown", "Unknown");
                     } else return new Pair<>("Unknown", "Unknown");
 
+                    DecimalFormat df2 = new DecimalFormat("#,###.##");
+                    DecimalFormat df5 = new DecimalFormat("#,###.#####");
+                    df2.setRoundingMode(RoundingMode.HALF_DOWN);
+                    df5.setRoundingMode(RoundingMode.HALF_DOWN);
+
                     if (Exchange.exchangeFetchers.containsKey(cryptoType)) {
                         double usd = Exchange.exchangeFetchers.get(cryptoType).getExchangeForCurrency(cryptoType);
                         if (usd >= 0) {
                             double totalValue = (balance * usd);
-                            DecimalFormat df = new DecimalFormat("#.##");
-                            df.setRoundingMode(RoundingMode.HALF_DOWN);
 
                             return new Pair<>(
-                                    balance + " " + cryptoType.getDenomination(),
-                                Double.parseDouble(df.format(totalValue)) + " USD");
+                                    df5.format(balance) + " " + cryptoType.getDenomination(),
+                                    df2.format(totalValue) + " USD");
                         }
                     }
 
-                    return new Pair<>(balance + " " + cryptoType.getDenomination(), "Unknown");
+                    return new Pair<>(df5.format(balance) + " " + cryptoType.getDenomination(), "Unknown");
                 }catch(Exception e){
                     e.printStackTrace();
                     return new Pair<>("Error", "Error");

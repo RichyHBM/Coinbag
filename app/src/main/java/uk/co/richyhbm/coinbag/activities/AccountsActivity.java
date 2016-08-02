@@ -1,17 +1,21 @@
 package uk.co.richyhbm.coinbag.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -61,12 +65,51 @@ public class AccountsActivity extends AppCompatActivity {
                 startActivity(receiveIntent);
             }
         });
+        registerForContextMenu(listView);
     }
+
 
     @Override
     protected void onResume() {
         super.onResume();
         resetListView();
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        AdapterView.AdapterContextMenuInfo adapterMenuInfo = (AdapterView.AdapterContextMenuInfo)menuInfo;
+        Wallet wallet = walletAdapter.getItem(adapterMenuInfo.position);
+
+        menu.setHeaderIcon(wallet.getType().getIcon());
+        menu.setHeaderTitle(wallet.getAddress());
+        menu.add("Delete");
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        // Here's how you can get the correct item in onContextItemSelected()
+        AdapterView.AdapterContextMenuInfo adapterMenuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        final Wallet wallet = walletAdapter.getItem(adapterMenuInfo.position);
+
+        if(item.getTitle().equals("Delete")) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Please confirm")
+                    .setMessage("Are you sure you want to remove address " + wallet.getAddress() + "?")
+                    .setIcon(wallet.getType().getIcon())
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            wallet.delete();
+                            resetListView();
+                            Toast.makeText(AccountsActivity.this, "Deleted address", Toast.LENGTH_LONG).show();
+                        }})
+                    .setNegativeButton(android.R.string.no, null).show();
+
+            return true;
+        } else {
+            return super.onContextItemSelected(item);
+        }
     }
 
     @Override

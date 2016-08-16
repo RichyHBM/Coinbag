@@ -3,6 +3,7 @@ package uk.co.richyhbm.coinbag.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -25,6 +26,7 @@ import uk.co.richyhbm.coinbag.adapters.WalletAdapter;
 
 public class AccountsActivity extends AppCompatActivity {
     WalletAdapter walletAdapter;
+    Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +49,12 @@ public class AccountsActivity extends AppCompatActivity {
             }
         });
 
-
         final Intent receiveIntent = new Intent(this, ReceiveActivity.class);
 
         List<Wallet> arrayOfWallet = Wallet.listAll(Wallet.class);
+        for(Wallet wallet: arrayOfWallet)
+            wallet.updateBalanceAndValues();
+
         walletAdapter = new WalletAdapter(this, arrayOfWallet);
         ListView listView = (ListView) findViewById(R.id.wallet_list);
         listView.setAdapter(walletAdapter);
@@ -66,12 +70,26 @@ public class AccountsActivity extends AppCompatActivity {
             }
         });
         registerForContextMenu(listView);
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                resetListView();
+                handler.postDelayed(this, 1000);
+            }
+        };
+        handler.postDelayed(runnable, 1);
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        List<Wallet> arrayOfWallet = Wallet.listAll(Wallet.class);
+        for(Wallet wallet: arrayOfWallet)
+            wallet.updateBalanceAndValues();
+
         resetListView();
     }
 
@@ -128,6 +146,10 @@ public class AccountsActivity extends AppCompatActivity {
 
         if (id == R.id.action_refresh) {
             resetListView();
+
+            List<Wallet> arrayOfWallet = Wallet.listAll(Wallet.class);
+            for(Wallet wallet: arrayOfWallet)
+                wallet.updateBalanceAndValues();
             return true;
         }
 

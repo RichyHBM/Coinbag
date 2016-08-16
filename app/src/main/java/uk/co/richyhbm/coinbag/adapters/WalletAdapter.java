@@ -58,54 +58,8 @@ public class WalletAdapter extends ArrayAdapter<Wallet> {
         address.setText(wallet.getAddress());
         cointype.setText(wallet.getType().toString());
 
-        String calculating = "Calculating";
-        balanceTextView.setText(calculating);
-        valueTextView.setText(calculating);
-
-        AsyncTask<Wallet, Void, Pair<String, String>> asyncTask = new AsyncTask<Wallet, Void, Pair<String, String>>() {
-            @Override
-            protected Pair<String, String> doInBackground(Wallet... params) {
-                Wallet wallet = params[0];
-                try {
-                    CryptoCurrencies cryptoType = wallet.getType();
-                    double balance = 0;
-                    if (Balance.balanceFetchers.containsKey(cryptoType)) {
-                        double blc = Balance.balanceFetchers.get(cryptoType).getBalanceForAddress(wallet.getAddress());
-                        if (blc >= 0) balance = blc;
-                        else return new Pair<>("Unknown", "Unknown");
-                    } else return new Pair<>("Unknown", "Unknown");
-
-                    DecimalFormat df2 = new DecimalFormat("#,###.##");
-                    DecimalFormat df5 = new DecimalFormat("#,###.#####");
-                    df2.setRoundingMode(RoundingMode.HALF_DOWN);
-                    df5.setRoundingMode(RoundingMode.HALF_DOWN);
-
-                    if (Exchange.exchangeFetchers.containsKey(cryptoType)) {
-                        double usd = Exchange.exchangeFetchers.get(cryptoType).getExchangeForCurrency(cryptoType);
-                        if (usd >= 0) {
-                            double totalValue = (balance * usd);
-
-                            return new Pair<>(
-                                    df5.format(balance) + " " + cryptoType.getDenomination(),
-                                    df2.format(totalValue) + " USD");
-                        }
-                    }
-
-                    return new Pair<>(df5.format(balance) + " " + cryptoType.getDenomination(), "Unknown");
-                }catch(Exception e){
-                    e.printStackTrace();
-                    return new Pair<>("Error", "Error");
-                }
-            }
-
-            @Override
-            protected void onPostExecute(Pair<String, String> result) {
-                balanceTextView.setText(result.first);
-                valueTextView.setText(result.second);
-            }
-        };
-
-        asyncTask.execute(wallet);
+        balanceTextView.setText(wallet.getBalance());
+        valueTextView.setText(wallet.getValues());
 
         return convertView;
     }

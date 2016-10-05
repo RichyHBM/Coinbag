@@ -36,4 +36,6 @@ dependencies {
     compile 'com.github.satyan:sugar:1.4'
     compile 'com.squareup.okhttp3:okhttp:3.4.0'
     compile 'com.squareup.moshi:moshi:1.2.0'
+    compile 'io.reactivex:rxjava:1.2.0'
+    compile 'io.reactivex:rxandroid:1.2.1'
 }

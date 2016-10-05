@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.richyhbm.coinbag.R;
@@ -51,11 +52,11 @@ public class AccountsActivity extends AppCompatActivity {
 
         final Intent receiveIntent = new Intent(this, ReceiveActivity.class);
 
-        List<Wallet> arrayOfWallet = Wallet.listAll(Wallet.class);
-        for(Wallet wallet: arrayOfWallet)
-            wallet.updateBalanceAndValues();
+        List<Wallet> wallets = Wallet.listAll(Wallet.class);
+        for(Wallet wallet : wallets)
+          wallet.updateValueBalance();
 
-        walletAdapter = new WalletAdapter(this, arrayOfWallet);
+        walletAdapter = new WalletAdapter(this, wallets);
         ListView listView = (ListView) findViewById(R.id.wallet_list);
         listView.setAdapter(walletAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -70,27 +71,17 @@ public class AccountsActivity extends AppCompatActivity {
             }
         });
         registerForContextMenu(listView);
-
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                resetListView();
-                handler.postDelayed(this, 1000);
-            }
-        };
-        handler.postDelayed(runnable, 1);
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        List<Wallet> arrayOfWallet = Wallet.listAll(Wallet.class);
-        for(Wallet wallet: arrayOfWallet)
-            wallet.updateBalanceAndValues();
-
-        resetListView();
+        List<Wallet> wallets = Wallet.listAll(Wallet.class);
+        for(Wallet wallet : wallets)
+            wallet.updateValueBalance();
+        walletAdapter.clear();
+        walletAdapter.addAll(wallets);
     }
 
     @Override
@@ -119,8 +110,10 @@ public class AccountsActivity extends AppCompatActivity {
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             wallet.delete();
-                            resetListView();
                             Toast.makeText(AccountsActivity.this, "Deleted address", Toast.LENGTH_LONG).show();
+                            List<Wallet> wallets = Wallet.listAll(Wallet.class);
+                            walletAdapter.clear();
+                            walletAdapter.addAll(wallets);
                         }})
                     .setNegativeButton(android.R.string.no, null).show();
 
@@ -145,11 +138,11 @@ public class AccountsActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_refresh) {
-            resetListView();
-
-            List<Wallet> arrayOfWallet = Wallet.listAll(Wallet.class);
-            for(Wallet wallet: arrayOfWallet)
-                wallet.updateBalanceAndValues();
+            List<Wallet> wallets = Wallet.listAll(Wallet.class);
+            for(Wallet wallet : wallets)
+                wallet.updateValueBalance();
+            walletAdapter.clear();
+            walletAdapter.addAll(wallets);
             return true;
         }
 
@@ -165,11 +158,5 @@ public class AccountsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void resetListView() {
-        List<Wallet> arrayOfWallet = Wallet.listAll(Wallet.class);
-        walletAdapter.clear();
-        walletAdapter.addAll(arrayOfWallet);
     }
 }

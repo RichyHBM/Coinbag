@@ -3,9 +3,7 @@ package uk.co.richyhbm.coinbag.enums;
 //Types of donations that are currently supported
 public enum DonationType {
     BITCOIN(0, "TEST_Bitcoin"),
-    LITECOIN(1, "TEST_Litecoin"),
-    ETHEREUM(2, "TEST_Ethereum"),
-    DASH(3, "TEST_Dash");
+    ETHEREUM(2, "TEST_Ethereum");
 
     //Use a value to assure donation types id's don't change, store the address to use with the enum
     private int value;
@@ -21,6 +19,15 @@ public enum DonationType {
 
     public String getAddress() {
         return address;
+    }
+
+    public String getDonationUrl() {
+        switch (this) {
+            case ETHEREUM: return "ethereum:" + this.getAddress();
+            case BITCOIN:
+            default:
+                return "bitcoin:" + this.getAddress();
+        }
     }
 
     @Override

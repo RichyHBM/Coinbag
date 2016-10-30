@@ -2,18 +2,21 @@ package uk.co.richyhbm.coinbag.activities;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import uk.co.richyhbm.coinbag.R;
 import uk.co.richyhbm.coinbag.enums.DonationType;
 
 public class AboutActivity extends AppCompatActivity implements View.OnClickListener {
-
+    private static final int REQUEST_CODE = 10;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,44 +69,27 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
             bitcoinDonation.setOnClickListener(this);
         }
 
-        ImageView litecoinDonation = (ImageView)findViewById(R.id.litecoin_donate);
-        if(litecoinDonation != null) {
-            litecoinDonation.setOnClickListener(this);
-        }
-
         ImageView ethereumDonation = (ImageView)findViewById(R.id.ethereum_donate);
         if(ethereumDonation != null) {
             ethereumDonation.setOnClickListener(this);
-        }
-
-        ImageView dashDonation = (ImageView)findViewById(R.id.dash_donate);
-        if(dashDonation != null) {
-            dashDonation.setOnClickListener(this);
         }
     }
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.bitcoin_donate) {
-            Intent intent = new Intent(this, DonateActivity.class);
-            intent.putExtra(DonateActivity.DONATION_TYPE_INTENT_EXTRA, DonationType.BITCOIN.getValue());
-            startActivity(intent);
-        }
-        else if(v.getId() == R.id.litecoin_donate) {
-            Intent intent = new Intent(this, DonateActivity.class);
-            intent.putExtra(DonateActivity.DONATION_TYPE_INTENT_EXTRA, DonationType.LITECOIN.getValue());
-            startActivity(intent);
-        }
-        else if(v.getId() == R.id.ethereum_donate) {
-            Intent intent = new Intent(this, DonateActivity.class);
-            intent.putExtra(DonateActivity.DONATION_TYPE_INTENT_EXTRA, DonationType.ETHEREUM.getValue());
-            startActivity(intent);
-        }
-        else if(v.getId() == R.id.dash_donate) {
-            Intent intent = new Intent(this, DonateActivity.class);
-            intent.putExtra(DonateActivity.DONATION_TYPE_INTENT_EXTRA, DonationType.DASH.getValue());
-            startActivity(intent);
+        if(v.getId() == R.id.bitcoin_donate || v.getId() == R.id.ethereum_donate ){
+            DonationType donationType = DonationType.BITCOIN;
+            if(v.getId() == R.id.bitcoin_donate) donationType = DonationType.BITCOIN;
+            else if(v.getId() == R.id.ethereum_donate) donationType = DonationType.ETHEREUM;
+
+            Intent donateIntent = new Intent("android.intent.action.VIEW", Uri.parse(donationType.getDonationUrl()));
+            if(this.getPackageManager().queryIntentActivities(donateIntent,PackageManager.MATCH_DEFAULT_ONLY).size() > 0) {
+                startActivity(donateIntent);
+            } else {
+                Intent intent = new Intent(this, DonateActivity.class);
+                intent.putExtra(DonateActivity.DONATION_TYPE_INTENT_EXTRA, donationType.getValue());
+                startActivity(intent);
+            }
         }
     }
-
 }

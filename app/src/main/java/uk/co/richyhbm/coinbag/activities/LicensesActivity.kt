@@ -57,13 +57,18 @@ class LicensesActivity : MaterialAboutActivity() {
                 "Coin Bag Icon", "Noun Project", "Karthick Nagarajan",
                 R.string.cc0_license)
 
+        val cryptoIconsLicense = createLicenseCard(context,
+                icon,
+                "cryptocurrency-icons", "2017", "Coinranking",
+                OpenSourceLicense.MIT.resourceId)
 
         return MaterialAboutList(
                 retrofitLicenseItem,
                 materialAboutLibraryLicense,
                 androidIconicsLicense,
                 googleMaterialTypefaceLicense,
-                logoLicense)
+                logoLicense,
+                cryptoIconsLicense)
     }
 
     override fun getActivityTitle(): CharSequence {

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Coin Bag</string>
+    <string name="_3rd_party">3rd Party</string>
+    <string name="apache_v2">Apache License v2.0</string>
+    <string name="mit">MIT License</string>
+    <string name="app_intro">AppIntro - Apache License 2.0</string>
+    <string name="retrofit">Retrofit - Apache License 2.0</string>
+    <string name="about_page_lib">About-Page - MIT License</string>
+    <string name="ok">OK</string>
 </resources>

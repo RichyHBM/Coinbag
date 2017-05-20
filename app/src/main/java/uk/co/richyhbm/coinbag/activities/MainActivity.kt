@@ -5,8 +5,9 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import uk.co.richyhbm.coinbag.R
 import android.content.Intent
-
-
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,12 +15,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
-
-        val i = Intent(this, AboutActivity::class.java)
-        startActivity(i)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.about_menu -> {
+                val i = Intent(this@MainActivity, AboutActivity::class.java)
+                startActivity(i)
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 }

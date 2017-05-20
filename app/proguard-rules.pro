@@ -34,3 +34,8 @@
 -keepattributes Exceptions
 
 -dontwarn okio.**
+
+-keep class .R
+-keep class **.R$* {
+    <fields>;
+}

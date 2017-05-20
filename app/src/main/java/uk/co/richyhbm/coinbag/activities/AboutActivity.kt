@@ -1,65 +1,72 @@
 package uk.co.richyhbm.coinbag.activities
 
-import android.os.Bundle
+import android.content.Context
 import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
-import mehdi.sakout.aboutpage.AboutPage
-import mehdi.sakout.aboutpage.Element
+import com.danielstone.materialaboutlibrary.MaterialAboutActivity
+import com.danielstone.materialaboutlibrary.items.MaterialAboutTitleItem
+import com.danielstone.materialaboutlibrary.model.MaterialAboutCard
+import com.danielstone.materialaboutlibrary.model.MaterialAboutList
 import uk.co.richyhbm.coinbag.R
+import com.danielstone.materialaboutlibrary.items.MaterialAboutActionItem
+import android.support.v4.content.ContextCompat
+import com.mikepenz.iconics.IconicsDrawable
+import com.danielstone.materialaboutlibrary.ConvenienceBuilder
+import android.content.pm.PackageManager
+import com.mikepenz.google_material_typeface_library.GoogleMaterial
+import android.support.v4.content.ContextCompat.startActivity
+import android.content.Intent
+import com.danielstone.materialaboutlibrary.items.MaterialAboutItemOnClickAction
+import com.mikepenz.iconics.typeface.IIcon
 
 
-class AboutActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val apacheLicenseWebView: WebView = WebView(this)
-        val mitLicenseWebView: WebView = WebView(this)
-
-        val licenseDialog: AlertDialog.Builder = AlertDialog.Builder(this)
-
-        val appIntroElement = Element()
-        val retrofitElement = Element()
-        val aboutPageElement = Element()
-
-        val removeWebView = { v: View ->
-            val parent = v.parent
-            if(parent is ViewGroup) {
-                parent.removeAllViews()
-            }
-        }
-
-        val showLicenseView = { str:Int, v: View ->
-            licenseDialog
-                    .setTitle(getString(str))
-                    .setView(v)
-                    .setNeutralButton(getString(R.string.ok), { _, _ -> removeWebView(v) })
-                    .setOnDismissListener({ removeWebView(v) })
-                    .show()
-        }
-
-        apacheLicenseWebView.loadUrl("file:///android_asset/apache-v2.html")
-        mitLicenseWebView.loadUrl("file:///android_asset/mit.html")
-
-        appIntroElement.title = getString(R.string.app_intro)
-        retrofitElement.title = getString(R.string.retrofit)
-        aboutPageElement.title = getString(R.string.about_page_lib)
-
-        appIntroElement.setOnClickListener({ _: View? -> showLicenseView(R.string.apache_v2, apacheLicenseWebView) })
-        retrofitElement.setOnClickListener({ _: View? -> showLicenseView(R.string.apache_v2, apacheLicenseWebView) })
-        aboutPageElement.setOnClickListener({ _: View? -> showLicenseView(R.string.mit, mitLicenseWebView) })
-
-        val aboutPage = AboutPage(this)
-                .isRTL(false)
-                .setImage(R.drawable.coin_bag)
-                .addGroup(getString(R.string._3rd_party))
-                .addItem(appIntroElement)
-                .addItem(retrofitElement)
-                .addItem(aboutPageElement)
-                .create()
-
-        setContentView(aboutPage)
+class AboutActivity : MaterialAboutActivity() {
+    fun getIcon(icon: IIcon): IconicsDrawable {
+        return IconicsDrawable(this)
+                .icon(icon)
+                .color(ContextCompat.getColor(this, R.color.grey_700))
+                .sizeDp(18)
     }
+
+    override fun getMaterialAboutList(context: Context): MaterialAboutList {
+        val aboutItem = MaterialAboutTitleItem.Builder()
+                .text(R.string.app_name)
+                .icon(R.drawable.coin_bag)
+
+        val versionItem = ConvenienceBuilder.createVersionActionItem(context,
+                getIcon(GoogleMaterial.Icon.gmd_info_outline),
+                "Version",
+                false)
+
+        val changelogItem = MaterialAboutActionItem.Builder()
+                .text("Changelog")
+                .icon(getIcon(GoogleMaterial.Icon.gmd_history))
+
+        val licensesItem = MaterialAboutActionItem.Builder()
+                .text("Licenses")
+                .icon(getIcon(GoogleMaterial.Icon.gmd_book))
+                .setOnClickAction {
+                    val intent = Intent(this@AboutActivity, LicensesActivity::class.java)
+                    startActivity(intent)
+                }
+
+
+        val appCardBuilder: MaterialAboutCard.Builder = MaterialAboutCard.Builder()
+                .addItem(aboutItem.build())
+                .addItem(versionItem)
+                .addItem(changelogItem.build())
+                .addItem(licensesItem.build())
+
+
+        return MaterialAboutList.Builder()
+                .addCard(appCardBuilder.build())
+                .build()
+    }
+
+    override fun getActivityTitle(): CharSequence {
+        return getString(R.string.mal_title_about)
+    }
+
 }

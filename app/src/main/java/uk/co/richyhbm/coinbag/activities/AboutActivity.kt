@@ -1,9 +1,6 @@
 package uk.co.richyhbm.coinbag.activities
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.Intent
+import android.content.*
 import android.net.Uri
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
@@ -18,6 +15,7 @@ import com.mikepenz.cryptocurrency_icons_typeface_library.CryptocurrencyIcons
 import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.typeface.IIcon
 import uk.co.richyhbm.coinbag.R
+import uk.co.richyhbm.coinbag.enums.Cryptocoins
 
 
 class AboutActivity : MaterialAboutActivity() {
@@ -32,6 +30,7 @@ class AboutActivity : MaterialAboutActivity() {
         return MaterialAboutList.Builder()
                 .addCard(getAppCardBuilder().build())
                 .addCard(getAuthorCardBuilder().build())
+                .addCard(getDonateCardBuilder().build())
                 .build()
     }
 
@@ -104,6 +103,53 @@ class AboutActivity : MaterialAboutActivity() {
                 .addItem(twitterItem.build())
 
         return authorCardBuilder
+    }
+
+    fun tryDonateIntent(crypto: Cryptocoins, address: String) {
+        try {
+            val uriIntent = Intent(Intent.ACTION_VIEW, Uri.parse(crypto.getUriString(address)))
+            startActivity(uriIntent)
+        } catch(e: ActivityNotFoundException) {
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("Donation Address", address)
+            clipboard.primaryClip = clip
+            Snackbar.make(currentFocus, crypto.getFriendlyName() + " donation address copied to clipboard!", Snackbar.LENGTH_LONG).show()
+        }
+    }
+
+    fun getDonateCardBuilder(): MaterialAboutCard.Builder {
+        val donateCardBuilder: MaterialAboutCard.Builder = MaterialAboutCard.Builder()
+                .title("Donate")
+
+        val bitcoinItem = MaterialAboutActionItem.Builder()
+                .text(Cryptocoins.Bitcoin.getFriendlyName())
+                .icon(getIcon(CryptocurrencyIcons.Icon.cci_btc))
+                .setOnClickAction {
+                    val address = getString(R.string.donate_btc)
+                    tryDonateIntent(Cryptocoins.Bitcoin, address)
+                }
+
+        val ethereumItem = MaterialAboutActionItem.Builder()
+                .text(Cryptocoins.Ethereum.getFriendlyName())
+                .icon(getIcon(CryptocurrencyIcons.Icon.cci_eth))
+                .setOnClickAction {
+                    val address = getString(R.string.donate_eth)
+                    tryDonateIntent(Cryptocoins.Ethereum, address)
+                }
+
+        val litecoinItem = MaterialAboutActionItem.Builder()
+                .text(Cryptocoins.Litecoin.getFriendlyName())
+                .icon(getIcon(CryptocurrencyIcons.Icon.cci_ltc))
+                .setOnClickAction {
+                    val address = getString(R.string.donate_ltc)
+                    tryDonateIntent(Cryptocoins.Litecoin, address)
+                }
+
+        donateCardBuilder.addItem(bitcoinItem.build())
+                .addItem(ethereumItem.build())
+                .addItem(litecoinItem.build())
+
+        return donateCardBuilder
     }
 
     override fun getActivityTitle(): CharSequence {

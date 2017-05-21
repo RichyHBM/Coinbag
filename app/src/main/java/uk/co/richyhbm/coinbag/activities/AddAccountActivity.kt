@@ -18,6 +18,7 @@ import android.support.v4.content.ContextCompat
 import android.widget.EditText
 import com.mikepenz.community_material_typeface_library.CommunityMaterial
 import com.mikepenz.iconics.IconicsDrawable
+import uk.co.richyhbm.coinbag.enums.Cryptocoins
 
 
 class AddAccountActivity : AppCompatActivity() {
@@ -27,8 +28,11 @@ class AddAccountActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_account)
 
         val spinnerArray = ArrayList<String>()
-        spinnerArray.add("Bitcoin")
-        spinnerArray.add("Ethereum")
+        for(crypto in Cryptocoins.values()) {
+            if(crypto.supported) {
+                spinnerArray.add(crypto.getFriendlyName())
+            }
+        }
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinnerArray)
 

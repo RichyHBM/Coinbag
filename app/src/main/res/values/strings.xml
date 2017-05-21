@@ -9,6 +9,10 @@
     <string name="ok">OK</string>
     <string name="about_item">About</string>
 
+    <string name="donate_btc">123</string>
+    <string name="donate_ltc">456</string>
+    <string name="donate_eth">789</string>
+
     <string name="cc0_license">
         "\n%1$s, %2$s\n"
 
@@ -65,4 +69,6 @@
     <string name="change_log">Change Log</string>
     <string name="add_acc_type">Type</string>
     <string name="add_acc_address_text">Address</string>
+    <string name="add_acc_cancel">Cancel</string>
+    <string name="add_acc_save">Save</string>
 </resources>

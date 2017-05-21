@@ -1,23 +1,22 @@
 package uk.co.richyhbm.coinbag.activities
 
 
+import android.content.Intent
 import android.hardware.Camera
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
-import android.view.View
-
-import uk.co.richyhbm.coinbag.R
-import android.widget.Spinner
-import android.widget.ArrayAdapter
-import com.google.zxing.integration.android.IntentIntegrator
-import android.widget.Toast
-import com.google.zxing.integration.android.IntentResult
-import android.content.Intent
+import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
+import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
+import com.google.zxing.integration.android.IntentIntegrator
 import com.mikepenz.community_material_typeface_library.CommunityMaterial
 import com.mikepenz.iconics.IconicsDrawable
+import uk.co.richyhbm.coinbag.R
 import uk.co.richyhbm.coinbag.enums.Cryptocoins
 
 
@@ -26,6 +25,9 @@ class AddAccountActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_account)
+
+        val address = findViewById(R.id.add_acc_address_entry_area) as EditText
+        address.text.clear()
 
         val spinnerArray = ArrayList<String>()
         for(crypto in Cryptocoins.values()) {
@@ -57,8 +59,15 @@ class AddAccountActivity : AppCompatActivity() {
             integrator.setBeepEnabled(false)
             integrator.setBarcodeImageEnabled(true)
             integrator.initiateScan()
-
         })
+
+        val cancelBtn = findViewById(R.id.add_acc_cancel) as Button
+        cancelBtn.setOnClickListener { _:View -> finish() }
+
+        val saveBtn = findViewById(R.id.add_acc_save) as Button
+        saveBtn.setOnClickListener { v:View ->
+            Snackbar.make(v, "Save button pressed!", Snackbar.LENGTH_LONG).show()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

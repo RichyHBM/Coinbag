@@ -9,7 +9,6 @@
     <string name="ok">OK</string>
     <string name="about_item">About</string>
 
-
     <string name="cc0_license">
         "\n%1$s, %2$s\n"
 
@@ -64,4 +63,6 @@
         "to any document created using the fonts or their derivatives."
     </string>
     <string name="change_log">Change Log</string>
+    <string name="add_acc_type">Type</string>
+    <string name="add_acc_address_text">Address</string>
 </resources>

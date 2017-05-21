@@ -31,7 +31,8 @@ class MainActivity : AppCompatActivity() {
                 .sizeDp(18))
 
         fab.setOnClickListener( { view: View ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).show()
+            val i = Intent(this@MainActivity, AddAccountActivity::class.java)
+            startActivity(i)
         })
     }
 

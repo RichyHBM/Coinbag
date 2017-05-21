@@ -72,6 +72,11 @@ class LicensesActivity : MaterialAboutActivity() {
                 "AppIntro Library", "2015", "Paolo Rotolo, Maximilian Narr",
                 OpenSourceLicense.APACHE_2.resourceId)
 
+        val zxingEmbeddedLicense = createLicenseCard(context,
+                icon,
+                "ZXing Android Embedded", "2012-2017", "ZXing authors, Journey Mobile",
+                OpenSourceLicense.APACHE_2.resourceId)
+
         return MaterialAboutList(
                 retrofitLicenseItem,
                 materialAboutLibraryLicense,
@@ -80,7 +85,8 @@ class LicensesActivity : MaterialAboutActivity() {
                 logoLicense,
                 cryptoIconsLicense,
                 communityMaterialIconsLicense,
-                appIntroLicense)
+                appIntroLicense,
+                zxingEmbeddedLicense)
     }
 
     override fun getActivityTitle(): CharSequence {

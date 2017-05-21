@@ -8,7 +8,7 @@ import com.danielstone.materialaboutlibrary.model.MaterialAboutList
 import uk.co.richyhbm.coinbag.R
 import com.danielstone.materialaboutlibrary.util.OpenSourceLicense
 import android.support.v4.content.ContextCompat
-import com.mikepenz.google_material_typeface_library.GoogleMaterial
+import com.mikepenz.community_material_typeface_library.CommunityMaterial
 import com.mikepenz.iconics.IconicsDrawable
 import com.danielstone.materialaboutlibrary.ConvenienceBuilder
 import com.danielstone.materialaboutlibrary.items.MaterialAboutActionItem
@@ -28,7 +28,7 @@ class LicensesActivity : MaterialAboutActivity() {
     override fun getMaterialAboutList(context: Context): MaterialAboutList {
 
         val icon = IconicsDrawable(context)
-                .icon(GoogleMaterial.Icon.gmd_book)
+                .icon(CommunityMaterial.Icon.cmd_book)
                 .color(ContextCompat.getColor(context, R.color.grey_700))
                 .sizeDp(18)
 
@@ -62,13 +62,25 @@ class LicensesActivity : MaterialAboutActivity() {
                 "cryptocurrency-icons", "2017", "Coinranking",
                 OpenSourceLicense.MIT.resourceId)
 
+        val communityMaterialIconsLicense = createLicenseCard(context,
+                icon,
+                "MaterialDesign", "2014", "Austin Andrews (http://materialdesignicons.com/)",
+                R.string.sil_open_font_license)
+
+        val appIntroLicense = createLicenseCard(context,
+                icon,
+                "AppIntro Library", "2015", "Paolo Rotolo, Maximilian Narr",
+                OpenSourceLicense.APACHE_2.resourceId)
+
         return MaterialAboutList(
                 retrofitLicenseItem,
                 materialAboutLibraryLicense,
                 androidIconicsLicense,
                 googleMaterialTypefaceLicense,
                 logoLicense,
-                cryptoIconsLicense)
+                cryptoIconsLicense,
+                communityMaterialIconsLicense,
+                appIntroLicense)
     }
 
     override fun getActivityTitle(): CharSequence {

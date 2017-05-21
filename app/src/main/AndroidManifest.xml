@@ -22,8 +22,10 @@
         <activity
             android:name=".activities.AboutActivity"
             android:theme="@style/MaterialAboutActivity" />
-        <activity android:name=".activities.LicensesActivity"
+        <activity
+            android:name=".activities.LicensesActivity"
             android:theme="@style/MaterialAboutActivity" />
+        <activity android:name=".activities.WelcomeActivity"></activity>
     </application>
 
 </manifest>

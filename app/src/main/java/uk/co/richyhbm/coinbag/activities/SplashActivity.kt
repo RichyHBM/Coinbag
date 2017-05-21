@@ -11,7 +11,8 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val i = Intent(this@SplashActivity, MainActivity::class.java)
+        val i = Intent(this@SplashActivity, WelcomeActivity::class.java)
         startActivity(i)
+        finish()
     }
 }

@@ -2,11 +2,12 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:drawable="@color/colorPrimary"/>
+        android:drawable="@color/grey_50"/>
 
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/coin_bag_splash"/>
+            android:src="@drawable/coin_bag_splash"
+            android:tint="@color/black"/>
     </item>
 </layer-list>

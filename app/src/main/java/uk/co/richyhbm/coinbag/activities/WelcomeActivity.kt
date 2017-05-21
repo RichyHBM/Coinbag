@@ -33,14 +33,27 @@ class WelcomeActivity : AppIntro() {
 
         addSlide(WelcomeSlideFragment.newInstance(
                 getString(R.string.app_name),
-                "A read-only crypto-currency wallet manager to track and receive crypto-currency payments",
-                R.drawable.coin_bag,
+                "A read-only crypto-currency wallet manager to track and receive payments",
+                CommunityMaterial.Icon.cmd_coin,
                 backgroundColor, textColor, textColor))
 
-        addSlide(WelcomeSlideFragment.newInstance("Coin Bag", "This is an app, 2", R.drawable.coin_bag, backgroundColor, textColor, textColor))
-        addSlide(WelcomeSlideFragment.newInstance("Coin Bag", "This is an app, 3", R.drawable.coin_bag, backgroundColor, textColor, textColor))
-        addSlide(WelcomeSlideFragment.newInstance("Coin Bag", "This is an app, 4", CommunityMaterial.Icon.cmd_folder, backgroundColor, textColor, textColor))
-        addSlide(WelcomeSlideFragment.newInstance("Coin Bag", "This is an app, 5", R.drawable.coin_bag, backgroundColor, textColor, textColor))
+        addSlide(WelcomeSlideFragment.newInstance(
+                "Secure",
+                "Coin bag doesn't have access to your private keys, so it can't lose them",
+                CommunityMaterial.Icon.cmd_lock,
+                backgroundColor, textColor, textColor))
+
+        addSlide(WelcomeSlideFragment.newInstance(
+                "Crypto-coins",
+                "Supports many different crypto-coins, with real-time currency conversion",
+                CommunityMaterial.Icon.cmd_currency_btc,
+                backgroundColor, textColor, textColor))
+
+        addSlide(WelcomeSlideFragment.newInstance(
+                "Keys",
+                "Enter your public keys manually, or scan them via their QR code",
+                CommunityMaterial.Icon.cmd_qrcode_scan,
+                backgroundColor, textColor, textColor))
 
         setNextArrowColor(indicatorButtons)
         setColorSkipButton(indicatorButtons)
@@ -55,22 +68,25 @@ class WelcomeActivity : AppIntro() {
 
     override fun onSkipPressed(currentFragment: Fragment) {
         super.onSkipPressed(currentFragment)
-        finish()
+        seenAndDone()
     }
 
     override fun onDonePressed(currentFragment: Fragment) {
         super.onDonePressed(currentFragment)
-
-        val editor = getPreferences(Context.MODE_PRIVATE).edit()
-        editor.putBoolean(seenIntro, true)
-        editor.apply()
-        
-        val i = Intent(this@WelcomeActivity, MainActivity::class.java)
-        startActivity(i)
-        finish()
+        seenAndDone()
     }
 
     override fun onSlideChanged(oldFragment: Fragment?, newFragment: Fragment?) {
         super.onSlideChanged(oldFragment, newFragment)
+    }
+
+    fun seenAndDone() {
+        val editor = getPreferences(Context.MODE_PRIVATE).edit()
+        editor.putBoolean(seenIntro, true)
+        editor.apply()
+
+        val i = Intent(this@WelcomeActivity, MainActivity::class.java)
+        startActivity(i)
+        finish()
     }
 }

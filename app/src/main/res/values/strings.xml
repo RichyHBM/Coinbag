@@ -71,4 +71,5 @@
     <string name="add_acc_address_text">Address</string>
     <string name="add_acc_cancel">Cancel</string>
     <string name="add_acc_save">Save</string>
+    <string name="refresh_menu_item">Refresh</string>
 </resources>

@@ -10,6 +10,7 @@ import android.support.annotation.DrawableRes
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.text.Layout
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -73,12 +74,14 @@ class WelcomeSlideFragment(val icon: IIcon?) : AppIntroBaseFragment() {
 
         val v =  super.onCreateView(inflater, container, savedInstanceState)
 
-        if(v != null && icon != null){
-            val i = v.findViewById(com.github.paolorotolo.appintro.R.id.image) as ImageView
-            i.setImageDrawable(IconicsDrawable(this.context)
-                    .icon(icon)
-                    .color(Color.parseColor("#000000"))
-                    .sizeDp(180))
+        if(v != null){
+            if(icon != null){
+                val i = v.findViewById(com.github.paolorotolo.appintro.R.id.image) as ImageView
+                i.setImageDrawable(IconicsDrawable(this.context)
+                        .icon(icon)
+                        .color(Color.parseColor("#000000"))
+                        .sizeDp(180))
+            }
         }
 
         return v

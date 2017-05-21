@@ -64,7 +64,7 @@ class LicensesActivity : MaterialAboutActivity() {
 
         val communityMaterialIconsLicense = createLicenseCard(context,
                 icon,
-                "MaterialDesign", "2014", "Austin Andrews (http://materialdesignicons.com/)",
+                "MaterialDesign Icons", "2014", "Austin Andrews (http://materialdesignicons.com/)",
                 R.string.sil_open_font_license)
 
         val appIntroLicense = createLicenseCard(context,

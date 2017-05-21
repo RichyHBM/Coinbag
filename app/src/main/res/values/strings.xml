@@ -63,4 +63,5 @@
         "requirement for fonts to remain under this license does not apply"
         "to any document created using the fonts or their derivatives."
     </string>
+    <string name="change_log">Change Log</string>
 </resources>

@@ -48,6 +48,10 @@ class AboutActivity : MaterialAboutActivity() {
         val changelogItem = MaterialAboutActionItem.Builder()
                 .text("Changelog")
                 .icon(getIcon(CommunityMaterial.Icon.cmd_history))
+                .setOnClickAction {
+                    val intent = Intent(this@AboutActivity, ChangeLogActivity::class.java)
+                    startActivity(intent)
+                }
 
         val licensesItem = MaterialAboutActionItem.Builder()
                 .text("Licenses")
@@ -72,10 +76,6 @@ class AboutActivity : MaterialAboutActivity() {
 
         val nameItem = MaterialAboutActionItem.Builder()
                 .text("Richy HBM")
-                .icon(getIcon(CommunityMaterial.Icon.cmd_account))
-
-        val websiteItem = MaterialAboutActionItem.Builder()
-                .text("Website")
                 .icon(getIcon(CommunityMaterial.Icon.cmd_web))
                 .setOnClickAction {
                     val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.richyhbm.co.uk"))
@@ -100,7 +100,6 @@ class AboutActivity : MaterialAboutActivity() {
 
         authorCardBuilder
                 .addItem(nameItem.build())
-                .addItem(websiteItem.build())
                 .addItem(githubItem.build())
                 .addItem(twitterItem.build())
 

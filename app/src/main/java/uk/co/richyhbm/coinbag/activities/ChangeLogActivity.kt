@@ -9,16 +9,14 @@ import com.danielstone.materialaboutlibrary.model.MaterialAboutList
 import com.mikepenz.community_material_typeface_library.CommunityMaterial
 import com.mikepenz.iconics.IconicsDrawable
 import uk.co.richyhbm.coinbag.R
+import uk.co.richyhbm.coinbag.utils.Icons
 
 class ChangeLogActivity : MaterialAboutActivity() {
     fun createChangelogCard(context: Context, version: String, changes: Array<String>): MaterialAboutCard {
         val cardBuilder = MaterialAboutCard.Builder()
 
         val versionItem =  MaterialAboutActionItem.Builder()
-                .icon(IconicsDrawable(this)
-                        .icon(CommunityMaterial.Icon.cmd_history)
-                        .color(ContextCompat.getColor(this, R.color.grey_700))
-                        .sizeDp(18))
+                .icon(Icons.getIcon(this, CommunityMaterial.Icon.cmd_history, R.color.grey_700, 18))
                 .setIconGravity(0)
                 .text(version)
 

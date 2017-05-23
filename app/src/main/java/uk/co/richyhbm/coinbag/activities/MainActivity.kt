@@ -17,6 +17,7 @@ import com.mikepenz.community_material_typeface_library.CommunityMaterial
 import com.mikepenz.iconics.IconicsDrawable
 import uk.co.richyhbm.coinbag.R
 import com.mikepenz.iconics.context.IconicsContextWrapper
+import uk.co.richyhbm.coinbag.utils.Icons
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,11 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         val fab = findViewById(R.id.main_fab) as FloatingActionButton
 
-        fab.setImageDrawable(
-                IconicsDrawable(this)
-                .icon(CommunityMaterial.Icon.cmd_plus)
-                .color(ContextCompat.getColor(this, R.color.grey_50))
-                .sizeDp(18))
+        fab.setImageDrawable( Icons.getIcon(this, CommunityMaterial.Icon.cmd_plus, R.color.grey_50, 18))
 
         fab.setOnClickListener( { _: View ->
             val i = Intent(this@MainActivity, AddAccountActivity::class.java)

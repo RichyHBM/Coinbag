@@ -18,8 +18,7 @@ import uk.co.richyhbm.coinbag.enums.Cryptocoins
 import android.widget.AdapterView
 import com.mikepenz.cryptocurrency_icons_typeface_library.CryptocurrencyIcons
 import android.widget.LinearLayout
-
-
+import uk.co.richyhbm.coinbag.utils.Icons
 
 
 class AddAccountActivity : AppCompatActivity() {
@@ -52,14 +51,8 @@ class AddAccountActivity : AppCompatActivity() {
                 lp.setMargins(margin, margin, margin, margin)
                 imageView.layoutParams = lp
                 when(position) {
-                    0 -> imageView.setImageDrawable(IconicsDrawable(view.context)
-                            .icon(CryptocurrencyIcons.Icon.cci_btc)
-                            .color(ContextCompat.getColor(view.context, R.color.grey_700))
-                            .sizeDp(72))
-                    1 -> imageView.setImageDrawable(IconicsDrawable(view.context)
-                            .icon(CryptocurrencyIcons.Icon.cci_eth)
-                            .color(ContextCompat.getColor(view.context, R.color.grey_700))
-                            .sizeDp(72))
+                    0 -> imageView.setImageDrawable(Icons.getIcon(view.context, CryptocurrencyIcons.Icon.cci_btc, R.color.grey_700, 72))
+                    1 -> imageView.setImageDrawable(Icons.getIcon(view.context, CryptocurrencyIcons.Icon.cci_eth, R.color.grey_700, 72))
                     else -> {}
                 }
             }
@@ -74,11 +67,7 @@ class AddAccountActivity : AppCompatActivity() {
 
         val fab = findViewById(R.id.scan_fab) as FloatingActionButton
 
-        fab.setImageDrawable(
-                IconicsDrawable(this)
-                        .icon(CommunityMaterial.Icon.cmd_qrcode_scan)
-                        .color(ContextCompat.getColor(this, R.color.grey_50))
-                        .sizeDp(18))
+        fab.setImageDrawable( Icons.getIcon(this, CommunityMaterial.Icon.cmd_qrcode_scan, R.color.grey_50, 18))
 
         fab.setOnClickListener( { _: View ->
             val integrator = IntentIntegrator(this)

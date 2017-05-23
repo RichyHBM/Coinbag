@@ -1,6 +1,7 @@
 package uk.co.richyhbm.coinbag.activities
 
 import android.content.*
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
@@ -16,14 +17,12 @@ import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.typeface.IIcon
 import uk.co.richyhbm.coinbag.R
 import uk.co.richyhbm.coinbag.enums.Cryptocoins
+import uk.co.richyhbm.coinbag.utils.Icons
 
 
 class AboutActivity : MaterialAboutActivity() {
-    fun getIcon(icon: IIcon): IconicsDrawable {
-        return IconicsDrawable(this)
-                .icon(icon)
-                .color(ContextCompat.getColor(this, R.color.grey_700))
-                .sizeDp(18)
+    fun getIcon(icon: IIcon): Drawable {
+        return Icons.getIcon(this, icon, R.color.grey_700, 18)
     }
 
     override fun getMaterialAboutList(context: Context): MaterialAboutList {

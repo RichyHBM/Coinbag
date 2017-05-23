@@ -1,6 +1,7 @@
 package uk.co.richyhbm.coinbag.activities
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.danielstone.materialaboutlibrary.MaterialAboutActivity
@@ -13,10 +14,11 @@ import com.mikepenz.iconics.IconicsDrawable
 import com.danielstone.materialaboutlibrary.ConvenienceBuilder
 import com.danielstone.materialaboutlibrary.items.MaterialAboutActionItem
 import com.danielstone.materialaboutlibrary.model.MaterialAboutCard
+import uk.co.richyhbm.coinbag.utils.Icons
 
 
 class LicensesActivity : MaterialAboutActivity() {
-    fun createLicenseCard(context:Context, icon: IconicsDrawable, libraryTitle: String, year: String, name: String, license: Int ): MaterialAboutCard {
+    fun createLicenseCard(context:Context, icon: Drawable, libraryTitle: String, year: String, name: String, license: Int ): MaterialAboutCard {
         val licenseItem = MaterialAboutActionItem.Builder()
                 .icon(icon)
                 .setIconGravity(0)
@@ -27,10 +29,7 @@ class LicensesActivity : MaterialAboutActivity() {
 
     override fun getMaterialAboutList(context: Context): MaterialAboutList {
 
-        val icon = IconicsDrawable(context)
-                .icon(CommunityMaterial.Icon.cmd_book)
-                .color(ContextCompat.getColor(context, R.color.grey_700))
-                .sizeDp(18)
+        val icon = Icons.getIcon(context, CommunityMaterial.Icon.cmd_book, R.color.grey_700, 18)
 
         val retrofitLicenseItem = createLicenseCard(context,
                 icon,

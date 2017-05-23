@@ -26,6 +26,7 @@ import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.typeface.IIcon
 
 import uk.co.richyhbm.coinbag.R
+import uk.co.richyhbm.coinbag.utils.Icons
 
 
 class WelcomeSlideFragment(val icon: IIcon?) : AppIntroBaseFragment() {
@@ -77,10 +78,7 @@ class WelcomeSlideFragment(val icon: IIcon?) : AppIntroBaseFragment() {
         if(v != null){
             if(icon != null){
                 val i = v.findViewById(com.github.paolorotolo.appintro.R.id.image) as ImageView
-                i.setImageDrawable(IconicsDrawable(this.context)
-                        .icon(icon)
-                        .color(Color.parseColor("#000000"))
-                        .sizeDp(180))
+                i.setImageDrawable(Icons.getIcon(this.context, icon, R.color.black, 180))
             }
         }
 

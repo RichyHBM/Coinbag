@@ -34,7 +34,7 @@ class WelcomeActivity : AppIntro() {
         addSlide(WelcomeSlideFragment.newInstance(
                 getString(R.string.app_name),
                 "A read-only crypto-currency wallet manager to track and receive payments",
-                CommunityMaterial.Icon.cmd_coin,
+                R.drawable.coin_bag,
                 backgroundColor, textColor, textColor))
 
         addSlide(WelcomeSlideFragment.newInstance(
@@ -46,7 +46,7 @@ class WelcomeActivity : AppIntro() {
         addSlide(WelcomeSlideFragment.newInstance(
                 "Crypto-coins",
                 "Supports many different crypto-coins, with real-time currency conversion",
-                CommunityMaterial.Icon.cmd_currency_btc,
+                CommunityMaterial.Icon.cmd_coin,
                 backgroundColor, textColor, textColor))
 
         addSlide(WelcomeSlideFragment.newInstance(

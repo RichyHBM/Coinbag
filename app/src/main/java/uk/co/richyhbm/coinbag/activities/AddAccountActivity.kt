@@ -9,15 +9,17 @@ import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Spinner
+import android.widget.*
 import com.google.zxing.integration.android.IntentIntegrator
 import com.mikepenz.community_material_typeface_library.CommunityMaterial
 import com.mikepenz.iconics.IconicsDrawable
 import uk.co.richyhbm.coinbag.R
 import uk.co.richyhbm.coinbag.enums.Cryptocoins
+import android.widget.AdapterView
+import com.mikepenz.cryptocurrency_icons_typeface_library.CryptocurrencyIcons
+import android.widget.LinearLayout
+
+
 
 
 class AddAccountActivity : AppCompatActivity() {
@@ -35,12 +37,40 @@ class AddAccountActivity : AppCompatActivity() {
                 spinnerArray.add(crypto.getFriendlyName())
             }
         }
-
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, spinnerArray)
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        val sItems = findViewById(R.id.add_acc_type_spinner) as Spinner
-        sItems.adapter = adapter
+        val spinner = findViewById(R.id.add_acc_type_spinner) as Spinner
+        spinner.adapter = adapter
+
+        val imageView = findViewById(R.id.add_acc_type_image) as ImageView
+
+        spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                val lp = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                val margin = (16 * view.context.getResources().getDisplayMetrics().density).toInt()
+                lp.setMargins(margin, margin, margin, margin)
+                imageView.layoutParams = lp
+                when(position) {
+                    0 -> imageView.setImageDrawable(IconicsDrawable(view.context)
+                            .icon(CryptocurrencyIcons.Icon.cci_btc)
+                            .color(ContextCompat.getColor(view.context, R.color.grey_700))
+                            .sizeDp(72))
+                    1 -> imageView.setImageDrawable(IconicsDrawable(view.context)
+                            .icon(CryptocurrencyIcons.Icon.cci_eth)
+                            .color(ContextCompat.getColor(view.context, R.color.grey_700))
+                            .sizeDp(72))
+                    else -> {}
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                val lp = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                lp.setMargins(0, 0, 0, 0)
+                imageView.layoutParams = lp
+                imageView.setImageResource(0)
+            }
+        }
 
         val fab = findViewById(R.id.scan_fab) as FloatingActionButton
 

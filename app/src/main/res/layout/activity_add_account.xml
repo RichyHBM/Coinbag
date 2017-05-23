@@ -46,11 +46,29 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
+                    <ImageView
+                        android:id="@+id/add_acc_type_image"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
                     <TextView
                         android:id="@+id/add_acc_type_text"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0px"
                         android:layout_height="match_parent"
                         android:layout_margin="8dp"
+                        android:layout_weight="0.25"
                         android:gravity="center_vertical|start"
                         android:text="@string/add_acc_type"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -58,9 +76,10 @@
 
                     <Spinner
                         android:id="@+id/add_acc_type_spinner"
-                        android:layout_width="match_parent"
+                        android:layout_width="0px"
                         android:layout_height="match_parent"
                         android:layout_margin="8dp"
+                        android:layout_weight="0.75"
                         android:drawSelectorOnTop="true"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintLeft_toRightOf="@+id/add_acc_type_text"
@@ -80,10 +99,42 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:id="@+id/add_acc_address_text"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/add_acc_name_text"
+                        android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
+                        android:layout_weight="0.25"
+                        android:gravity="center_vertical|start"
+                        android:text="@string/add_acc_name_text"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/add_acc_name_entry_area"
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="0.75"
+                        android:ems="10"
+                        android:inputType="text|textAutoCorrect" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/add_acc_address_text"
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="0.25"
                         android:gravity="center_vertical|start"
                         android:text="@string/add_acc_address_text"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -91,9 +142,10 @@
 
                     <EditText
                         android:id="@+id/add_acc_address_entry_area"
-                        android:layout_width="match_parent"
+                        android:layout_width="0px"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
+                        android:layout_weight="0.75"
                         android:ems="10"
                         android:inputType="textMultiLine" />
                 </LinearLayout>
@@ -125,11 +177,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:gravity="center_vertical|center_horizontal"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
                         android:layout_weight="1"
-                        android:text="@string/add_acc_save" />
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="@string/add_acc_save"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </LinearLayout>
 
             </LinearLayout>

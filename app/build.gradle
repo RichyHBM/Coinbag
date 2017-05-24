@@ -30,6 +30,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-scalars:2.3.0'
     compile 'com.github.daniel-stoneuk:material-about-library:1.9.0'
     compile 'com.mikepenz:iconics-core:2.8.2@aar'
     compile 'com.mikepenz:community-material-typeface:1.9.32.1@aar'

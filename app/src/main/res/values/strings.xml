@@ -73,4 +73,5 @@
     <string name="add_acc_save">Save</string>
     <string name="refresh_menu_item">Refresh</string>
     <string name="add_acc_name_text">Name</string>
+    <string name="add_acc_balance_label">Balance</string>
 </resources>

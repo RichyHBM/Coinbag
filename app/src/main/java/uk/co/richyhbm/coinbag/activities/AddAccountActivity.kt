@@ -19,6 +19,8 @@ import android.widget.AdapterView
 import com.mikepenz.cryptocurrency_icons_typeface_library.CryptocurrencyIcons
 import android.widget.LinearLayout
 import uk.co.richyhbm.coinbag.utils.Icons
+import android.view.View.OnFocusChangeListener
+import uk.co.richyhbm.coinbag.utils.BalanceFetcher
 
 
 class AddAccountActivity : AppCompatActivity() {
@@ -27,8 +29,18 @@ class AddAccountActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_account)
 
+        val balance = findViewById(R.id.add_acc_balance_text) as EditText
+
         val address = findViewById(R.id.add_acc_address_entry_area) as EditText
         address.text.clear()
+        address.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                BalanceFetcher.getBalance(Cryptocoins.Bitcoin, address.text.toString(), {s:String ->
+                    balance.text.clear()
+                    balance.text.append(s)
+                })
+            }
+        }
 
         val spinnerArray = ArrayList<String>()
         for(crypto in Cryptocoins.values()) {

@@ -1,38 +1,30 @@
 package uk.co.richyhbm.coinbag.activities
 
-import android.content.Context
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
-import android.support.v4.content.ContextCompat
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import com.mikepenz.community_material_typeface_library.CommunityMaterial
-import com.mikepenz.iconics.IconicsDrawable
+import uk.co.richyhbm.coinbag.BR
 import uk.co.richyhbm.coinbag.R
-import com.mikepenz.iconics.context.IconicsContextWrapper
+import uk.co.richyhbm.coinbag.databinding.ActivityMainBinding
 import uk.co.richyhbm.coinbag.utils.Icons
+import uk.co.richyhbm.coinbag.view_model.ActivityMainViewModel
 
 class MainActivity : AppCompatActivity() {
+    val viewModel = ActivityMainViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.setVariable(BR.vm, viewModel)
+        binding.executePendingBindings()
 
-        val fab = findViewById(R.id.main_fab) as FloatingActionButton
-
-        fab.setImageDrawable( Icons.getIcon(this, CommunityMaterial.Icon.cmd_plus, R.color.grey_50, 18))
-
-        fab.setOnClickListener( { _: View ->
-            val i = Intent(this@MainActivity, AddAccountActivity::class.java)
-            startActivity(i)
-        })
+        viewModel.fabIcon.set( Icons.getIcon(this, CommunityMaterial.Icon.cmd_plus, R.color.grey_50, 18))
 
         val refreshLayout = findViewById(R.id.main_swipe_refresh_layout) as SwipeRefreshLayout
         refreshLayout.setOnRefreshListener {
@@ -56,6 +48,11 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         updateAdapter()
+    }
+
+    fun onFabClick(v: View) {
+        val i = Intent(this@MainActivity, AddAccountActivity::class.java)
+        startActivity(i)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -19,7 +19,6 @@ import uk.co.richyhbm.coinbag.R
 import uk.co.richyhbm.coinbag.enums.Cryptocoins
 import uk.co.richyhbm.coinbag.utils.Icons
 
-
 class AboutActivity : MaterialAboutActivity() {
     fun getIcon(icon: IIcon): Drawable {
         return Icons.getIcon(this, icon, R.color.grey_700, 18)

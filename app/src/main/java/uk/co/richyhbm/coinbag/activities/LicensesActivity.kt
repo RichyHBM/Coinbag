@@ -2,20 +2,14 @@ package uk.co.richyhbm.coinbag.activities
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
 import com.danielstone.materialaboutlibrary.MaterialAboutActivity
-import com.danielstone.materialaboutlibrary.model.MaterialAboutList
-import uk.co.richyhbm.coinbag.R
-import com.danielstone.materialaboutlibrary.util.OpenSourceLicense
-import android.support.v4.content.ContextCompat
-import com.mikepenz.community_material_typeface_library.CommunityMaterial
-import com.mikepenz.iconics.IconicsDrawable
-import com.danielstone.materialaboutlibrary.ConvenienceBuilder
 import com.danielstone.materialaboutlibrary.items.MaterialAboutActionItem
 import com.danielstone.materialaboutlibrary.model.MaterialAboutCard
+import com.danielstone.materialaboutlibrary.model.MaterialAboutList
+import com.danielstone.materialaboutlibrary.util.OpenSourceLicense
+import com.mikepenz.community_material_typeface_library.CommunityMaterial
+import uk.co.richyhbm.coinbag.R
 import uk.co.richyhbm.coinbag.utils.Icons
-
 
 class LicensesActivity : MaterialAboutActivity() {
     fun createLicenseCard(context:Context, icon: Drawable, libraryTitle: String, year: String, name: String, license: Int ): MaterialAboutCard {

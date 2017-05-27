@@ -12,7 +12,6 @@ import com.mikepenz.iconics.IconicsDrawable
 import uk.co.richyhbm.coinbag.R
 import uk.co.richyhbm.coinbag.fragments.WelcomeSlideFragment
 
-
 class WelcomeActivity : AppIntro() {
     val seenIntro = "seenIntro"
 

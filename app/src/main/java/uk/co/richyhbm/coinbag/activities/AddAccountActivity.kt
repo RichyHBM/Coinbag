@@ -1,6 +1,5 @@
 package uk.co.richyhbm.coinbag.activities
 
-
 import android.content.Intent
 import android.hardware.Camera
 import android.os.Bundle
@@ -21,7 +20,6 @@ import android.widget.LinearLayout
 import uk.co.richyhbm.coinbag.utils.Icons
 import android.view.View.OnFocusChangeListener
 import uk.co.richyhbm.coinbag.utils.BalanceFetcher
-
 
 class AddAccountActivity : AppCompatActivity() {
 

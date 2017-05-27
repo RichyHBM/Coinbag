@@ -2,15 +2,12 @@ package uk.co.richyhbm.coinbag.utils
 
 import android.util.Log
 import retrofit2.Call
-import uk.co.richyhbm.coinbag.enums.Cryptocoins
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.Retrofit
-import uk.co.richyhbm.coinbag.requests.BlockchainInfo
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
-
+import uk.co.richyhbm.coinbag.enums.Cryptocoins
+import uk.co.richyhbm.coinbag.requests.BlockchainInfo
 
 object BalanceFetcher {
     fun getBalance(type: Cryptocoins, address:String, respond: (String) -> Unit) {

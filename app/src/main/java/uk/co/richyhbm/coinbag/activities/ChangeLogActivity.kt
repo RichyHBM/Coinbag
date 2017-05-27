@@ -1,13 +1,11 @@
 package uk.co.richyhbm.coinbag.activities
 
 import android.content.Context
-import android.support.v4.content.ContextCompat
 import com.danielstone.materialaboutlibrary.MaterialAboutActivity
 import com.danielstone.materialaboutlibrary.items.MaterialAboutActionItem
 import com.danielstone.materialaboutlibrary.model.MaterialAboutCard
 import com.danielstone.materialaboutlibrary.model.MaterialAboutList
 import com.mikepenz.community_material_typeface_library.CommunityMaterial
-import com.mikepenz.iconics.IconicsDrawable
 import uk.co.richyhbm.coinbag.R
 import uk.co.richyhbm.coinbag.utils.Icons
 

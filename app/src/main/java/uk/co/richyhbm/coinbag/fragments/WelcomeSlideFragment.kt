@@ -1,33 +1,16 @@
 package uk.co.richyhbm.coinbag.fragments
 
-import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.Drawable
-import android.net.Uri
 import android.os.Bundle
 import android.support.annotation.ColorInt
 import android.support.annotation.DrawableRes
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.text.Layout
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import com.github.paolorotolo.appintro.AppIntroBaseFragment
-import com.github.paolorotolo.appintro.AppIntroFragment
-import com.github.paolorotolo.appintro.ISlideBackgroundColorHolder
-import com.mikepenz.community_material_typeface_library.CommunityMaterial
-import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.typeface.IIcon
-
 import uk.co.richyhbm.coinbag.R
 import uk.co.richyhbm.coinbag.utils.Icons
-
 
 class WelcomeSlideFragment(val icon: IIcon?) : AppIntroBaseFragment() {
 

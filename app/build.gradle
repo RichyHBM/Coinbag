@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 kapt {
     generateStubs = true
@@ -51,7 +52,7 @@ dependencies {
     kapt "com.android.databinding:compiler:$gradle_version"
     //Room
     compile "android.arch.persistence.room:runtime:$android_arch_room_version"
-    kapt "android.arch.persistence.room:compiler:$android_arch_room_version"
+    kapt  "android.arch.persistence.room:compiler:$android_arch_room_version"
     //Test
     testCompile 'junit:junit:4.12'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {

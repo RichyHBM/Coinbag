@@ -12,16 +12,4 @@ import uk.co.richyhbm.coinbag.database.entities.*
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun walletDao(): WalletDao
-
-    companion object Singleton {
-        private var database: AppDatabase? = null
-
-        fun get(context: Context): AppDatabase {
-            if(database == null) {
-                database = Room.databaseBuilder(context, AppDatabase::class.java, "wallets-db").build()
-            }
-
-            return database!!
-        }
-    }
 }

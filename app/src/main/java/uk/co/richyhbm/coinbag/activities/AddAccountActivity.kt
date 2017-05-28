@@ -14,6 +14,7 @@ import android.widget.Spinner
 import com.google.zxing.integration.android.IntentIntegrator
 import com.mikepenz.community_material_typeface_library.CommunityMaterial
 import uk.co.richyhbm.coinbag.BR
+import uk.co.richyhbm.coinbag.MyApp
 import uk.co.richyhbm.coinbag.R
 import uk.co.richyhbm.coinbag.database.AppDatabase
 import uk.co.richyhbm.coinbag.database.entities.Wallet
@@ -75,7 +76,7 @@ class AddAccountActivity : AppCompatActivity() {
         wallet.walletNickName = viewModel.walletName.get()
 
         AsyncWrap<Unit>( {
-            val walletDao =  AppDatabase.get(applicationContext).walletDao()
+            val walletDao =  MyApp.database!!.walletDao()
             if(wallet.walletNickName.isNullOrBlank()) {
                 wallet.walletNickName = "%s %d".format(
                         cryptoType.getFriendlyName(),

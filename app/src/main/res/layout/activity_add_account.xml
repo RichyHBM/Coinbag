@@ -132,6 +132,7 @@
                             android:layout_margin="8dp"
                             android:layout_weight="0.75"
                             android:ems="10"
+                            android:text="@={vm.walletName}"
                             android:inputType="text|textAutoCorrect" />
                     </LinearLayout>
 
@@ -162,7 +163,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
                             android:layout_weight="0.75"
-                            android:text="@{vm.address}"
+                            android:text="@={vm.address}"
                             android:ems="10"
                             android:inputType="textMultiLine" />
                     </LinearLayout>

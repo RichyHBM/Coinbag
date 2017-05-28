@@ -1,6 +1,7 @@
 package uk.co.richyhbm.coinbag.enums
 
 enum class Cryptocoins(val supported:Boolean) {
+    Other(false),
     Bitcoin(true),
     Litecoin(false),
     Ethereum(true);

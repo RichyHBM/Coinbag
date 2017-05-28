@@ -11,6 +11,7 @@ class AddAccountViewModel {
     val cryptoIcon = ObservableField<Drawable>(ColorDrawable(Color.TRANSPARENT))
     val cryptoIconVisible = ObservableField<Boolean>(true)
     val address = ObservableField<String>("")
+    val walletName = ObservableField<String>("")
     val supportedCryptoList = ObservableField<Array<String>>()
     val spinnerSelectedIdx = ObservableField<Int>(0)
 }

@@ -6,6 +6,7 @@ import android.hardware.Camera
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.EditText
@@ -14,8 +15,11 @@ import com.google.zxing.integration.android.IntentIntegrator
 import com.mikepenz.community_material_typeface_library.CommunityMaterial
 import uk.co.richyhbm.coinbag.BR
 import uk.co.richyhbm.coinbag.R
+import uk.co.richyhbm.coinbag.database.AppDatabase
+import uk.co.richyhbm.coinbag.database.entities.Wallet
 import uk.co.richyhbm.coinbag.databinding.ActivityAddAccountBinding
 import uk.co.richyhbm.coinbag.enums.Cryptocoins
+import uk.co.richyhbm.coinbag.utils.AsyncWrap
 import uk.co.richyhbm.coinbag.utils.Icons
 import uk.co.richyhbm.coinbag.view_model.AddAccountViewModel
 
@@ -64,7 +68,25 @@ class AddAccountActivity : AppCompatActivity() {
     }
 
     fun onSaveButtonClick(v: View) {
-        Snackbar.make(v, "Save button pressed!", Snackbar.LENGTH_LONG).show()
+        val wallet = Wallet()
+        val cryptoType = Cryptocoins.valueOf(viewModel.supportedCryptoList.get()[viewModel.spinnerSelectedIdx.get()])
+        wallet.walletType = cryptoType
+        wallet.walletAddress = viewModel.address.get()
+        wallet.walletNickName = viewModel.walletName.get()
+
+        AsyncWrap<Unit>( {
+            val walletDao =  AppDatabase.get(applicationContext).walletDao()
+            if(wallet.walletNickName.isNullOrBlank()) {
+                wallet.walletNickName = "%s %d".format(
+                        cryptoType.getFriendlyName(),
+                        walletDao.loadAllByType(cryptoType).size + 1)
+            }
+            walletDao.insertAll(wallet)
+        }, {
+            finish()
+        }, { ex:Exception? ->
+            Snackbar.make(v, "Failed: " + ex!!.message, Snackbar.LENGTH_LONG).show()
+        }).execute()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

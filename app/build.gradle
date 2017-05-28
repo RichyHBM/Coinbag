@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
+
+kapt {
+    generateStubs = true
+}
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -24,30 +27,36 @@ android {
     }
 }
 
-kapt {
-    generateStubs = true
-}
-
 dependencies {
+    //Jars
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    //Modules
     compile project(':cryptocurrency-icons')
+    //Kotlin
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    //Support
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    //OSS
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-scalars:2.3.0'
     compile 'com.github.daniel-stoneuk:material-about-library:1.9.0'
     compile 'com.mikepenz:iconics-core:2.8.2@aar'
     compile 'com.mikepenz:community-material-typeface:1.9.32.1@aar'
     compile 'com.github.paolorotolo:appintro:4.1.0'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support:support-v4:25.3.1'
     compile 'com.journeyapps:zxing-android-embedded:3.5.0'
-    testCompile 'junit:junit:4.12'
+    //Data binding
     kapt "com.android.databinding:compiler:$gradle_version"
+    //Room
+    compile "android.arch.persistence.room:runtime:$android_arch_room_version"
+    kapt "android.arch.persistence.room:compiler:$android_arch_room_version"
+    //Test
+    testCompile 'junit:junit:4.12'
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
 }
 repositories {
     mavenCentral()

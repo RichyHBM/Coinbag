@@ -1,1 +1,0 @@
--keep class com.mikepenz.cryptocurrency_icons_typeface_library.CryptocurrencyIcons { *; }

@@ -12,7 +12,7 @@ import com.danielstone.materialaboutlibrary.items.MaterialAboutTitleItem
 import com.danielstone.materialaboutlibrary.model.MaterialAboutCard
 import com.danielstone.materialaboutlibrary.model.MaterialAboutList
 import com.mikepenz.community_material_typeface_library.CommunityMaterial
-import com.mikepenz.cryptocurrency_icons_typeface_library.CryptocurrencyIcons
+import com.mikepenz.cryptocoinsicons_typeface_library.CryptocoinsIcons
 import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.typeface.IIcon
 import uk.co.richyhbm.coinbag.R
@@ -121,7 +121,7 @@ class AboutActivity : MaterialAboutActivity() {
 
         val bitcoinItem = MaterialAboutActionItem.Builder()
                 .text(Cryptocoins.Bitcoin.getFriendlyName())
-                .icon(getIcon(CryptocurrencyIcons.Icon.cci_btc))
+                .icon(getIcon(CryptocoinsIcons.Icon.cci_BTC))
                 .setOnClickAction {
                     val address = getString(R.string.donate_btc)
                     tryDonateIntent(Cryptocoins.Bitcoin, address)
@@ -129,7 +129,7 @@ class AboutActivity : MaterialAboutActivity() {
 
         val ethereumItem = MaterialAboutActionItem.Builder()
                 .text(Cryptocoins.Ethereum.getFriendlyName())
-                .icon(getIcon(CryptocurrencyIcons.Icon.cci_eth))
+                .icon(getIcon(CryptocoinsIcons.Icon.cci_ETH_alt))
                 .setOnClickAction {
                     val address = getString(R.string.donate_eth)
                     tryDonateIntent(Cryptocoins.Ethereum, address)
@@ -137,7 +137,7 @@ class AboutActivity : MaterialAboutActivity() {
 
         val litecoinItem = MaterialAboutActionItem.Builder()
                 .text(Cryptocoins.Litecoin.getFriendlyName())
-                .icon(getIcon(CryptocurrencyIcons.Icon.cci_ltc))
+                .icon(getIcon(CryptocoinsIcons.Icon.cci_LTC))
                 .setOnClickAction {
                     val address = getString(R.string.donate_ltc)
                     tryDonateIntent(Cryptocoins.Litecoin, address)

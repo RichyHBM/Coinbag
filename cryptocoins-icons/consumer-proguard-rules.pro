@@ -1,0 +1,1 @@
+-keep class com.mikepenz.cryptocoinsicons_typeface_library.CryptocoinsIcons { *; }

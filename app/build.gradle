@@ -33,7 +33,7 @@ dependencies {
     //Jars
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //Modules
-    compile project(':cryptocurrency-icons')
+    compile project(':cryptocoins-icons')
     //Kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     //Support

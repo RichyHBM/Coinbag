@@ -52,7 +52,7 @@ class LicensesActivity : MaterialAboutActivity() {
 
         val cryptoIconsLicense = createLicenseCard(context,
                 icon,
-                "cryptocurrency-icons", "2017", "Coinranking",
+                "Cryptocoins icons", "2017", "Martin Allien",
                 OpenSourceLicense.MIT.resourceId)
 
         val communityMaterialIconsLicense = createLicenseCard(context,

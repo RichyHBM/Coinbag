@@ -21,11 +21,11 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion rootProject.targetSdkVersion
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         consumerProguardFiles 'consumer-proguard-rules.pro'
-        versionCode 100
-        versionName "1.0.0"
+        versionCode 20175
+        versionName "2017.5"
     }
     buildTypes {
         release {
@@ -34,7 +34,6 @@ android {
         }
     }
 }
-
 dependencies {
     compile 'com.mikepenz:iconics-core:2.8.2@aar'
 }

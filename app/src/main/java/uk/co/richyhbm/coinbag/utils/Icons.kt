@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
-import com.mikepenz.cryptocurrency_icons_typeface_library.CryptocurrencyIcons
+import com.mikepenz.cryptocoinsicons_typeface_library.CryptocoinsIcons
 import com.mikepenz.community_material_typeface_library.CommunityMaterial
 import com.mikepenz.iconics.IconicsDrawable
 import com.mikepenz.iconics.typeface.IIcon
@@ -20,10 +20,10 @@ object Icons {
 
     fun getCryptoIcon(type: Cryptocoins): IIcon {
         when(type) {
-            Cryptocoins.Bitcoin -> return CryptocurrencyIcons.Icon.cci_btc
-            Cryptocoins.Litecoin -> return CryptocurrencyIcons.Icon.cci_ltc
-            Cryptocoins.Ethereum -> return CryptocurrencyIcons.Icon.cci_eth
-            Cryptocoins.Other -> return CommunityMaterial.Icon.cmd_help
+            Cryptocoins.Bitcoin -> return CryptocoinsIcons.Icon.cci_BTC
+            Cryptocoins.Litecoin -> return CryptocoinsIcons.Icon.cci_LTC
+            Cryptocoins.Ethereum -> return CryptocoinsIcons.Icon.cci_ETH_alt
+            Cryptocoins.Other -> return CommunityMaterial.Icon.cmd_help_circle
         }
     }
 }

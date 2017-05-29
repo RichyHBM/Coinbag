@@ -4,7 +4,6 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.AsyncTask
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -18,16 +17,19 @@ import uk.co.richyhbm.coinbag.databinding.ActivityMainBinding
 import uk.co.richyhbm.coinbag.utils.Icons
 import uk.co.richyhbm.coinbag.view_model.ActivityMainViewModel
 import android.support.v7.widget.RecyclerView
-import uk.co.richyhbm.coinbag.MyApp
+import android.util.Log
+import io.realm.Realm
 import uk.co.richyhbm.coinbag.adapters.WalletAdapter
-import uk.co.richyhbm.coinbag.database.entities.Wallet
-import uk.co.richyhbm.coinbag.utils.AsyncWrap
+import uk.co.richyhbm.coinbag.realm.RealmWallet
+import uk.co.richyhbm.coinbag.enums.Cryptocoins
+import uk.co.richyhbm.coinbag.models.Wallet
 
 
 class MainActivity : AppCompatActivity() {
     val viewModel = ActivityMainViewModel()
     var recyclerView: RecyclerView? = null
     var refreshLayout: SwipeRefreshLayout? = null
+    var recyclerAdapter: WalletAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +46,9 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.main_recycler_view) as RecyclerView
         recyclerView!!.setHasFixedSize(true)
+
+        recyclerAdapter = WalletAdapter(arrayOf(), applicationContext)
+        recyclerView!!.adapter = recyclerAdapter
 
         val layoutManager = LinearLayoutManager(this@MainActivity)
         recyclerView!!.layoutManager = layoutManager
@@ -89,12 +94,20 @@ class MainActivity : AppCompatActivity() {
     fun updateAdapter() {
         val asyncTask = object : AsyncTask<Void, Void, Array<Wallet>>() {
             override fun doInBackground(vararg params: Void): Array<Wallet> {
-                val walletDao =  MyApp.database!!.walletDao()
-                return walletDao.getAll().toTypedArray()
+                val realm = Realm.getDefaultInstance()
+                val realmWallets = realm.where(RealmWallet::class.java).findAll()
+                val wallets = realmWallets.map{realmWallet ->
+                    Wallet( realmWallet.walletNickName,
+                            realmWallet.walletNickName,
+                            Cryptocoins.valueOf(realmWallet.walletType))
+                }.toTypedArray()
+                realm.close()
+                return wallets
             }
 
             override fun onPostExecute(result: Array<Wallet>) {
-                recyclerView!!.adapter = WalletAdapter(result, applicationContext)
+                recyclerAdapter!!.wallets = result
+                recyclerView!!.adapter.notifyDataSetChanged()
                 refreshLayout!!.isRefreshing = false
             }
         }

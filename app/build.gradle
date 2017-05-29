@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
 
 kapt {
     generateStubs = true
@@ -50,9 +51,6 @@ dependencies {
     compile 'com.journeyapps:zxing-android-embedded:3.5.0'
     //Data binding
     kapt "com.android.databinding:compiler:$gradle_version"
-    //Room
-    compile "android.arch.persistence.room:runtime:$android_arch_room_version"
-    kapt  "android.arch.persistence.room:compiler:$android_arch_room_version"
     //Test
     testCompile 'junit:junit:4.12'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {

@@ -8,14 +8,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import uk.co.richyhbm.coinbag.BR
 import uk.co.richyhbm.coinbag.R
-import uk.co.richyhbm.coinbag.database.entities.Wallet
 import uk.co.richyhbm.coinbag.databinding.WalletRowViewBinding
+import uk.co.richyhbm.coinbag.models.Wallet
 import uk.co.richyhbm.coinbag.utils.AsyncWrap
 import uk.co.richyhbm.coinbag.utils.Icons
 import uk.co.richyhbm.coinbag.view_model.WalletRowViewModel
 
 
-class WalletAdapter(val wallets: Array<Wallet>, val context: Context) : RecyclerView.Adapter<WalletAdapter.WalletViewHolder>() {
+class WalletAdapter(var wallets: Array<Wallet>, val context: Context) : RecyclerView.Adapter<WalletAdapter.WalletViewHolder>() {
     override fun getItemCount(): Int {
         return wallets.size
     }
@@ -37,8 +37,9 @@ class WalletAdapter(val wallets: Array<Wallet>, val context: Context) : Recycler
         val item = wallets[position]
         val walletVM = WalletRowViewModel()
 
-        walletVM.cryptoName.set(item.walletNickName)
-        walletVM.cryptoIcon.set(Icons.getIcon(context, Icons.getCryptoIcon(item.walletType), R.color.grey_700, 72))
+
+        walletVM.cryptoName.set(item.name)
+        walletVM.cryptoIcon.set(Icons.getIcon(context, Icons.getCryptoIcon(item.type), R.color.grey_700, 36))
 
         walletVM.cryptoBalance.set("Fetching")
         walletVM.cryptoValue.set("Fetching")

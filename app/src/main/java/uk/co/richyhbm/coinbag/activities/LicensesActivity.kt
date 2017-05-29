@@ -67,7 +67,12 @@ class LicensesActivity : MaterialAboutActivity() {
 
         val zxingEmbeddedLicense = createLicenseCard(context,
                 icon,
-                "ZXing Android Embedded", "2012-2017", "ZXing authors, Journey Mobile",
+                "ZXing Android Embedded", "2012", "ZXing authors, Journey Mobile",
+                OpenSourceLicense.APACHE_2.resourceId)
+
+        val realmLicense = createLicenseCard(context,
+                icon,
+                "Realm Java Database", "2012", "Realm (http://realm.io)",
                 OpenSourceLicense.APACHE_2.resourceId)
 
         return MaterialAboutList(
@@ -79,7 +84,8 @@ class LicensesActivity : MaterialAboutActivity() {
                 cryptoIconsLicense,
                 communityMaterialIconsLicense,
                 appIntroLicense,
-                zxingEmbeddedLicense)
+                zxingEmbeddedLicense,
+                realmLicense)
     }
 
     override fun getActivityTitle(): CharSequence {

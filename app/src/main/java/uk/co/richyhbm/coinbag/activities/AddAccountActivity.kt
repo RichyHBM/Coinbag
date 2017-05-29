@@ -3,26 +3,26 @@ package uk.co.richyhbm.coinbag.activities
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.hardware.Camera
+import android.os.AsyncTask
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
-import android.widget.EditText
 import android.widget.Spinner
 import com.google.zxing.integration.android.IntentIntegrator
 import com.mikepenz.community_material_typeface_library.CommunityMaterial
+import io.realm.Realm
 import uk.co.richyhbm.coinbag.BR
-import uk.co.richyhbm.coinbag.MyApp
 import uk.co.richyhbm.coinbag.R
-import uk.co.richyhbm.coinbag.database.AppDatabase
-import uk.co.richyhbm.coinbag.database.entities.Wallet
+import uk.co.richyhbm.coinbag.realm.RealmWallet
 import uk.co.richyhbm.coinbag.databinding.ActivityAddAccountBinding
 import uk.co.richyhbm.coinbag.enums.Cryptocoins
-import uk.co.richyhbm.coinbag.utils.AsyncWrap
+import uk.co.richyhbm.coinbag.models.Wallet
 import uk.co.richyhbm.coinbag.utils.Icons
 import uk.co.richyhbm.coinbag.view_model.AddAccountViewModel
+
+
 
 class AddAccountActivity : AppCompatActivity() {
     val viewModel = AddAccountViewModel()
@@ -69,25 +69,47 @@ class AddAccountActivity : AppCompatActivity() {
     }
 
     fun onSaveButtonClick(v: View) {
-        val wallet = Wallet()
         val cryptoType = Cryptocoins.valueOf(viewModel.supportedCryptoList.get()[viewModel.spinnerSelectedIdx.get()])
-        wallet.walletType = cryptoType
-        wallet.walletAddress = viewModel.address.get()
-        wallet.walletNickName = viewModel.walletName.get()
 
-        AsyncWrap<Unit>( {
-            val walletDao =  MyApp.database!!.walletDao()
-            if(wallet.walletNickName.isNullOrBlank()) {
-                wallet.walletNickName = "%s %d".format(
-                        cryptoType.getFriendlyName(),
-                        walletDao.loadAllByType(cryptoType).size + 1)
+        val wallet = Wallet(
+                viewModel.walletName.get(),
+                viewModel.address.get(),
+                cryptoType
+        )
+
+        val asyncTask = object : AsyncTask<Wallet, Void, Unit>() {
+            override fun doInBackground(vararg params: Wallet): Unit {
+                val walletModel = params.first()
+                val realm = Realm.getDefaultInstance()
+                val walletTypeCount = realm.where(RealmWallet::class.java).equalTo("walletType", walletModel.type.getFriendlyName()).findAll().size
+
+                var key: Int
+                try {
+                    key = realm.where(RealmWallet::class.java).max("walletId").toInt() + 1
+                } catch (ex: ArrayIndexOutOfBoundsException) {
+                    key = 0
+                }
+
+                realm.beginTransaction()
+                val realmWallet = realm.createObject(RealmWallet::class.java, key)
+                realmWallet.walletType = walletModel.type.getFriendlyName()
+                realmWallet.walletAddress = walletModel.address
+
+                if(!walletModel.name.isNullOrBlank()) {
+                    realmWallet.walletNickName = walletModel.name
+                } else {
+                    realmWallet.walletNickName = walletModel.type.getFriendlyName() + " " + (walletTypeCount + 1)
+                }
+                realm.commitTransaction()
+                realm.close()
             }
-            walletDao.insertAll(wallet)
-        }, {
-            finish()
-        }, { ex:Exception? ->
-            Snackbar.make(v, "Failed: " + ex!!.message, Snackbar.LENGTH_LONG).show()
-        }).execute()
+
+            override fun onPostExecute(u:Unit) {
+                finish()
+            }
+        }
+
+        asyncTask.execute(wallet)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

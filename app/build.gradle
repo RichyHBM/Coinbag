@@ -49,6 +49,7 @@ dependencies {
     compile 'com.mikepenz:community-material-typeface:1.9.32.1@aar'
     compile 'com.github.paolorotolo:appintro:4.1.0'
     compile 'com.journeyapps:zxing-android-embedded:3.5.0'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
     //Data binding
     kapt "com.android.databinding:compiler:$gradle_version"
     //Test

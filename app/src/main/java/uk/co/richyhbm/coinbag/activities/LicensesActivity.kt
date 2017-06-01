@@ -75,6 +75,11 @@ class LicensesActivity : MaterialAboutActivity() {
                 "Realm Java Database", "2012", "Realm (http://realm.io)",
                 OpenSourceLicense.APACHE_2.resourceId)
 
+        val mPAndroidChartLicense = createLicenseCard(context,
+                icon,
+                "MPAndroidChart", "2016", "Philipp Jahoda",
+                OpenSourceLicense.APACHE_2.resourceId)
+
         return MaterialAboutList(
                 retrofitLicenseItem,
                 materialAboutLibraryLicense,
@@ -85,7 +90,8 @@ class LicensesActivity : MaterialAboutActivity() {
                 communityMaterialIconsLicense,
                 appIntroLicense,
                 zxingEmbeddedLicense,
-                realmLicense)
+                realmLicense,
+                mPAndroidChartLicense)
     }
 
     override fun getActivityTitle(): CharSequence {

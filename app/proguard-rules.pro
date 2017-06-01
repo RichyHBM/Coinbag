@@ -39,3 +39,5 @@
 -keep class **.R$* {
     <fields>;
 }
+
+-keep class com.github.mikephil.charting.** { *; }

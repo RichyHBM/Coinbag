@@ -80,6 +80,11 @@ class LicensesActivity : MaterialAboutActivity() {
                 "MPAndroidChart", "2016", "Philipp Jahoda",
                 OpenSourceLicense.APACHE_2.resourceId)
 
+        val moshiLicense = createLicenseCard(context,
+                icon,
+                "Moshi", "2015", "Square Inc.",
+                OpenSourceLicense.APACHE_2.resourceId)
+
         return MaterialAboutList(
                 retrofitLicenseItem,
                 materialAboutLibraryLicense,
@@ -91,7 +96,8 @@ class LicensesActivity : MaterialAboutActivity() {
                 appIntroLicense,
                 zxingEmbeddedLicense,
                 realmLicense,
-                mPAndroidChartLicense)
+                mPAndroidChartLicense,
+                moshiLicense)
     }
 
     override fun getActivityTitle(): CharSequence {

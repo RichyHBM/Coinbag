@@ -98,7 +98,7 @@ class MainActivity : AppCompatActivity() {
                 val realmWallets = realm.where(RealmWallet::class.java).findAll()
                 val wallets = realmWallets.map{realmWallet ->
                     Wallet( realmWallet.walletNickName,
-                            realmWallet.walletNickName,
+                            realmWallet.walletAddress,
                             Cryptocoins.valueOf(realmWallet.walletType))
                 }.toTypedArray()
                 realm.close()

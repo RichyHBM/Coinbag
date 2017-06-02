@@ -34,6 +34,8 @@
 -keepattributes Exceptions
 
 -dontwarn okio.**
+-dontwarn javax.annotation.Nullable
+-dontwarn javax.annotation.ParametersAreNonnullByDefault
 
 -keep class .R
 -keep class **.R$* {

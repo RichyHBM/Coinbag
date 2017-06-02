@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/CoinBag.iml" filepath="$PROJECT_DIR$/CoinBag.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/cryptocoins-icons/cryptocoins-icons.iml" filepath="$PROJECT_DIR$/cryptocoins-icons/cryptocoins-icons.iml" />
-      <module fileurl="file://$PROJECT_DIR$/cryptocurrency-icons/cryptocurrency-icons.iml" filepath="$PROJECT_DIR$/cryptocurrency-icons/cryptocurrency-icons.iml" />
     </modules>
   </component>
 </project>

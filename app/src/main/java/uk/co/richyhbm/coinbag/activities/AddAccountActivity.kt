@@ -85,7 +85,8 @@ class AddAccountActivity : AppCompatActivity() {
 
                 var key: Int
                 try {
-                    key = realm.where(RealmWallet::class.java).max("walletId").toInt() + 1
+                    val tempKey = realm.where(RealmWallet::class.java).max("walletId")
+                    key = if(tempKey == null) 0 else tempKey.toInt() + 1
                 } catch (ex: ArrayIndexOutOfBoundsException) {
                     key = 0
                 }

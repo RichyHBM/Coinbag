@@ -1,7 +1,7 @@
 package uk.co.richyhbm.coinbag.adapters
 
 import android.content.Context
-import android.support.design.widget.Snackbar
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.github.mikephil.charting.charts.PieChart
 import uk.co.richyhbm.coinbag.R
+import uk.co.richyhbm.coinbag.activities.WalletDetailsActivity
 import uk.co.richyhbm.coinbag.databinding.WalletRowViewBinding
 import uk.co.richyhbm.coinbag.databinding.WalletsSummaryRowBinding
 import uk.co.richyhbm.coinbag.models.Wallet
@@ -40,7 +41,6 @@ class WalletListAdapter(var wallets: Array<Wallet>, val context: Context) : Recy
         when (viewType) {
             WALLET_SUMMARY -> {
                 val v1 = WalletsSummaryRowBinding.inflate(layoutInflater, parent, false)
-
                 return WalletSummaryViewHolder(v1)
             }
             else -> {
@@ -66,7 +66,18 @@ class WalletListAdapter(var wallets: Array<Wallet>, val context: Context) : Recy
         }
         else -> {
             val walletVM = buildWalletRow(position - 1)
-            (holder as WalletRowViewHolder).bind(walletVM)
+
+            val viewHolder =(holder as WalletRowViewHolder)
+            viewHolder.itemView.setOnClickListener {
+                val i = Intent(context, WalletDetailsActivity::class.java)
+                i.putExtra(WalletDetailsActivity.WALLET_ID, walletVM.walletId.get())
+                i.putExtra(WalletDetailsActivity.WALLET_NAME, walletVM.walletName.get())
+                i.putExtra(WalletDetailsActivity.WALLET_ADDRESS, wallets[position - 1].address)
+                i.putExtra(WalletDetailsActivity.WALLET_TYPE, walletVM.walletType.get())
+                context.startActivity(i)
+            }
+
+            viewHolder.bind(walletVM)
         }
     }
 
@@ -75,11 +86,12 @@ class WalletListAdapter(var wallets: Array<Wallet>, val context: Context) : Recy
         val walletVM = WalletRowViewModel()
 
         walletVM.walletId.set(item.id)
-        walletVM.cryptoName.set(item.name)
+        walletVM.walletName.set(item.name)
         walletVM.cryptoIcon.set(Icons.getIcon(context, Icons.getCryptoIcon(item.type), R.color.grey_700, 36))
-        walletVM.cryptoAddress.set(item.address.substring(0, 6) + "..." + item.address.takeLast(6))
-        walletVM.cryptoBalance.set("Fetching")
-        walletVM.cryptoValue.set("Fetching")
+        walletVM.walletAddress.set(item.address.substring(0, 6) + "..." + item.address.takeLast(6))
+        walletVM.walletType.set(item.type.toString())
+        walletVM.walletBalance.set("Fetching")
+        walletVM.walletValue.set("Fetching")
 
         AsyncWrap( {
             BalanceFetcher.getBalance(item.type, item.address)
@@ -90,14 +102,14 @@ class WalletListAdapter(var wallets: Array<Wallet>, val context: Context) : Recy
                     walletData.addToTotalValue(value)
                     walletData.addNewTypeValuePair(Pair(item.type, value))
                     val totalUsd = "%,.2f USD".format(walletData.getTotalValue())
-                    walletVM.cryptoValue.set("%,.2f USD".format(value))
+                    walletVM.walletValue.set("%,.2f USD".format(value))
                     walletData.summaryVM.totalValue.set(totalUsd)
                 }
-                walletVM.cryptoBalance.set("%,.6f".format(d) + " " + item.type.symbol)
+                walletVM.walletBalance.set("%,.6f".format(d) + " " + item.type.symbol)
 
             } else {
-                walletVM.cryptoBalance.set("Failed to fetch")
-                walletVM.cryptoValue.set("Failed to fetch")
+                walletVM.walletBalance.set("Failed to fetch")
+                walletVM.walletValue.set("Failed to fetch")
             }
 
             if(pos + 2 == getItemCount() && pieChart != null) {

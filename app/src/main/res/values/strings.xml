@@ -9,9 +9,9 @@
     <string name="ok">OK</string>
     <string name="about_item">About</string>
 
-    <string name="donate_btc">123</string>
-    <string name="donate_ltc">456</string>
-    <string name="donate_eth">789</string>
+    <string name="donate_btc">18Tqqf3eyrJoY6a3mAiQ5rWbCRCqxMe5cY</string>
+    <string name="donate_ltc">LRJXggi6DNd6yUgg9xPjhtTpw2xfZSJBjG</string>
+    <string name="donate_eth">0xe7a4421f081557f98f7522888602cef164a6c060</string>
 
     <string name="cc0_license">
         "\n%1$s, %2$s\n"

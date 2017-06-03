@@ -74,4 +74,5 @@
     <string name="refresh_menu_item">Refresh</string>
     <string name="add_acc_name_text">Name</string>
     <string name="add_acc_balance_label">Balance</string>
+    <string name="delete_edit_menu">Delete</string>
 </resources>

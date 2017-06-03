@@ -33,6 +33,7 @@
             android:name=".activities.ChangeLogActivity"
             android:theme="@style/MaterialAboutActivity" />
         <activity android:name=".activities.AddAccountActivity" />
+        <activity android:name=".activities.EditAccountActivity"></activity>
     </application>
 
 </manifest>

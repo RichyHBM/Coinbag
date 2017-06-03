@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 
 class WalletRowViewModel {
+    val walletId = ObservableField<Int>(0)
     val cryptoIcon = ObservableField<Drawable>(ColorDrawable(Color.TRANSPARENT))
     val cryptoName = ObservableField<String>("")
     val cryptoBalance = ObservableField<String>("")

@@ -17,10 +17,10 @@ import uk.co.richyhbm.coinbag.utils.BalanceFetcher
 import uk.co.richyhbm.coinbag.utils.Icons
 import uk.co.richyhbm.coinbag.utils.WalletSummaryData
 import uk.co.richyhbm.coinbag.view_holders.WalletSummaryViewHolder
-import uk.co.richyhbm.coinbag.view_holders.WalletViewHolder
+import uk.co.richyhbm.coinbag.view_holders.WalletRowViewHolder
 import uk.co.richyhbm.coinbag.view_model.WalletRowViewModel
 
-class WalletAdapter(var wallets: Array<Wallet>, val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class WalletListAdapter(var wallets: Array<Wallet>, val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     val WALLET_SUMMARY = 1
     val WALLET_ROW = 2
     var pieChart:PieChart? = null
@@ -45,7 +45,7 @@ class WalletAdapter(var wallets: Array<Wallet>, val context: Context) : Recycler
             }
             else -> {
                 val v2 = WalletRowViewBinding.inflate(layoutInflater, parent, false)
-                return WalletViewHolder(v2)
+                return WalletRowViewHolder(v2)
             }
         }
     }
@@ -66,7 +66,7 @@ class WalletAdapter(var wallets: Array<Wallet>, val context: Context) : Recycler
         }
         else -> {
             val walletVM = buildWalletRow(position - 1)
-            (holder as WalletViewHolder).bind(walletVM)
+            (holder as WalletRowViewHolder).bind(walletVM)
         }
     }
 
@@ -74,6 +74,7 @@ class WalletAdapter(var wallets: Array<Wallet>, val context: Context) : Recycler
         val item = wallets[pos]
         val walletVM = WalletRowViewModel()
 
+        walletVM.walletId.set(item.id)
         walletVM.cryptoName.set(item.name)
         walletVM.cryptoIcon.set(Icons.getIcon(context, Icons.getCryptoIcon(item.type), R.color.grey_700, 36))
         walletVM.cryptoAddress.set(item.address.substring(0, 6) + "..." + item.address.takeLast(6))
@@ -105,7 +106,7 @@ class WalletAdapter(var wallets: Array<Wallet>, val context: Context) : Recycler
 
         }, { ex:Exception? ->
             Log.e("Err fetching balance", ex!!.message)
-            Toast.makeText(context, "Failed to fetch balance for " + item.name, Snackbar.LENGTH_LONG).show()
+            Toast.makeText(context, "Failed to fetch balance for " + item.name, Toast.LENGTH_LONG).show()
             if(pos + 2 == getItemCount() && pieChart != null) {
                 walletData.buildChart(pieChart!!).invalidate()
             }

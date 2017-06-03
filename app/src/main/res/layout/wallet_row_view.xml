@@ -74,11 +74,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/mal_baseline_quarter"
-                    android:text="@{vm.cryptoBalance}"
+                    android:text="@{vm.cryptoValue}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    tools:text="132 BTC"/>
+                    tools:text="1,124.15 USD"/>
 
             </android.support.constraint.ConstraintLayout>
 
@@ -94,26 +94,27 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/mal_baseline_quarter"
-                    android:text="@{vm.cryptoBalance}"
+                    android:text="@{vm.cryptoAddress}"
                     android:textAlignment="textEnd"
                     android:gravity="end"
                     app:layout_constraintBottom_toTopOf="@+id/textView4"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="123abc456efg"  />
 
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/mal_baseline_quarter"
-                    android:text="@{vm.cryptoValue}"
+                    android:text="@{vm.cryptoBalance}"
                     android:textAlignment="textEnd"
                     android:gravity="end"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    tools:text="124.015 USD" />
+                    tools:text="132,312.5432 BTC" />
 
             </android.support.constraint.ConstraintLayout>
         </LinearLayout>

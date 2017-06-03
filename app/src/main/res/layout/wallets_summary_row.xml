@@ -52,6 +52,32 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/mal_baseline_quarter"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:layout_weight="0.25"
+                            android:text="Total value" />
+
+                        <TextView
+                            android:id="@+id/total_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:layout_weight="0.75"
+                            android:textAlignment="textEnd"
+                            android:gravity="end"
+                            tools:text="1,124.15 USD"
+                            android:text="@{vm.totalValue}" />
+
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </android.support.constraint.ConstraintLayout>

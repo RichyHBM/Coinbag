@@ -10,4 +10,5 @@ class WalletRowViewModel {
     val cryptoName = ObservableField<String>("")
     val cryptoBalance = ObservableField<String>("")
     val cryptoValue = ObservableField<String>("")
+    val cryptoAddress = ObservableField<String>("")
 }

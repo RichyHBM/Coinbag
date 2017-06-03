@@ -1,15 +1,14 @@
 package uk.co.richyhbm.coinbag
 
 import android.app.Application
-import android.util.Log
+import android.widget.Toast
 import io.realm.Realm
-import uk.co.richyhbm.coinbag.enums.Cryptocoins
-import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import uk.co.richyhbm.coinbag.enums.Cryptocoins
 import uk.co.richyhbm.coinbag.requests.CoinMarketCap
-
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 class MyApp : Application() {
     override fun onCreate() {
@@ -38,6 +37,8 @@ class MyApp : Application() {
                         crypt.setValue(cap[crypt.symbol]!!)
                     }
                 }
+            }else {
+                Toast.makeText(this, "Unable to get crypto values", Toast.LENGTH_LONG).show()
             }
         }, 0, 1, TimeUnit.MINUTES)
     }

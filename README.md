@@ -52,7 +52,7 @@ Coin Bag is read only, it only stores your wallet public keys and thus can't mak
     }
 	```
 
-6. Add a new entry into `utils/BalanceFetcher.kt` to return the amount of crypto held in the address
+6. Create a function for retreiving the balance using the previously created retrofit interface
 	```
 	object LtcBlockcypher {
 	    fun getBalance(address:String) : Double {
@@ -67,8 +67,22 @@ Coin Bag is read only, it only stores your wallet public keys and thus can't mak
 	        if(response == null) {
 	            return 0.0
 	        } else {
-	            //Turn into ether
+	            //Turn into ltc
 	            return response.balance.toDouble() / 100000000
+	        }
+	    }
+	}
+	```
+
+6. Add a new entry into `utils/BalanceFetcher.kt` to return the amount of crypto held in the address
+	```
+	object BalanceFetcher {
+	    fun getBalance(type: Cryptocoins, address:String): Double {
+	        return when(type) {
+	            ...
+	            Cryptocoins.Litecoin -> LtcBlockcypher.getBalance(address)
+	            ...
+	            else -> 0.0
 	        }
 	    }
 	}

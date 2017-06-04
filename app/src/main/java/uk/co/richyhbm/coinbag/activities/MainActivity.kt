@@ -4,6 +4,7 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.AsyncTask
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     var recyclerView: RecyclerView? = null
     var refreshLayout: SwipeRefreshLayout? = null
     var recyclerListAdapter: WalletListAdapter? = null
+    val scrollToShowFab = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +55,16 @@ class MainActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this@MainActivity)
         recyclerView!!.layoutManager = layoutManager
+
+        recyclerView!!.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                val fabAddNew = findViewById(R.id.main_fab) as FloatingActionButton
+                if (dy > scrollToShowFab)
+                    fabAddNew.hide()
+                else if (dy < scrollToShowFab)
+                    fabAddNew.show()
+            }
+        })
 
         updateAdapter()
     }
@@ -80,6 +92,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.add_new_menu -> {
+                val i = Intent(this@MainActivity, AddAccountActivity::class.java)
+                startActivity(i)
+                return true
+            }
             R.id.refresh_menu -> {
                 updateAdapter()
                 return true

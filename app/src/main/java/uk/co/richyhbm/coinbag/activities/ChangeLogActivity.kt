@@ -39,5 +39,9 @@ class ChangeLogActivity : MaterialAboutActivity() {
         return getString(R.string.change_log)
     }
 
-    val v1_0_0 = arrayOf("Support BTC", "Support ETH", "Initial app release")
+    val v1_0_0 = arrayOf(
+            "Support BTC",
+            "Support ETH",
+            "Support LTC",
+            "Show pie chart distribution of value")
 }

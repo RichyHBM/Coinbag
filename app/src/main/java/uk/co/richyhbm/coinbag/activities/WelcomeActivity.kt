@@ -32,8 +32,14 @@ class WelcomeActivity : AppIntro() {
 
         addSlide(WelcomeSlideFragment.newInstance(
                 getString(R.string.app_name),
-                "A read-only crypto-currency wallet manager to track and receive payments",
+                "A read-only crypto-currency wallet watcher to track and receive payments",
                 R.drawable.coin_bag,
+                backgroundColor, textColor, textColor))
+
+        addSlide(WelcomeSlideFragment.newInstance(
+                "Keys",
+                "Enter your public keys manually, or scan them via their QR code",
+                CommunityMaterial.Icon.cmd_qrcode_scan,
                 backgroundColor, textColor, textColor))
 
         addSlide(WelcomeSlideFragment.newInstance(
@@ -44,14 +50,14 @@ class WelcomeActivity : AppIntro() {
 
         addSlide(WelcomeSlideFragment.newInstance(
                 "Crypto-coins",
-                "Supports many different crypto-coins, with real-time currency conversion",
+                "Supports many different crypto-coins, with real-time currency values",
                 CommunityMaterial.Icon.cmd_coin,
                 backgroundColor, textColor, textColor))
 
         addSlide(WelcomeSlideFragment.newInstance(
                 "Keys",
-                "Enter your public keys manually, or scan them via their QR code",
-                CommunityMaterial.Icon.cmd_qrcode_scan,
+                "Keep track of the value of each of your wallets",
+                CommunityMaterial.Icon.cmd_cash,
                 backgroundColor, textColor, textColor))
 
         setNextArrowColor(indicatorButtons)

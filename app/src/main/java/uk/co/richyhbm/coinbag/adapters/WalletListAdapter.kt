@@ -105,7 +105,7 @@ class WalletListAdapter(var wallets: Array<Wallet>, val context: Context) : Recy
                     walletVM.walletValue.set("%,.2f USD".format(value))
                     walletData.summaryVM.totalValue.set(totalUsd)
                 }
-                walletVM.walletBalance.set("%,.6f".format(d) + " " + item.type.symbol)
+                walletVM.walletBalance.set("%,.4f".format(d) + " " + item.type.symbol)
 
             } else {
                 walletVM.walletBalance.set("Failed to fetch")

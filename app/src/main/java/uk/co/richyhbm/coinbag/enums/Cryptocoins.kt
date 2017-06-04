@@ -6,7 +6,7 @@ import java.lang.Float.*
 enum class Cryptocoins(val supported:Boolean, val symbol: String) {
     Other(false, ""),
     Bitcoin(true, "BTC"),
-    Litecoin(false, "LTC"),
+    Litecoin(true, "LTC"),
     Ethereum(true, "ETH");
 
     val value = AtomicInteger(0)

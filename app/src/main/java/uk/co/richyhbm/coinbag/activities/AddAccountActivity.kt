@@ -6,7 +6,9 @@ import android.hardware.Camera
 import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Spinner
@@ -32,6 +34,9 @@ class AddAccountActivity : AppCompatActivity() {
         val binding: ActivityAddAccountBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_account)
         binding.setVariable(BR.vm, viewModel)
         binding.executePendingBindings()
+
+        title = "New wallet"
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         viewModel.fabIcon.set(Icons.getIcon(this, CommunityMaterial.Icon.cmd_qrcode_scan, R.color.grey_50, 18))
         viewModel.address.set("")
@@ -112,6 +117,14 @@ class AddAccountActivity : AppCompatActivity() {
         }
 
         asyncTask.execute(wallet)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

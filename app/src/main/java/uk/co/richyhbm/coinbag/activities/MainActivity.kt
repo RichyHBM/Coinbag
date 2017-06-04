@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         binding.setVariable(BR.vm, viewModel)
         binding.executePendingBindings()
 
+        setTitle(R.string.app_name)
+
         viewModel.fabIcon.set( Icons.getIcon(this, CommunityMaterial.Icon.cmd_plus, R.color.grey_50, 18))
 
         refreshLayout = findViewById(R.id.main_swipe_refresh_layout) as SwipeRefreshLayout
@@ -67,6 +69,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        setTitle(R.string.app_name)
         updateAdapter()
     }
 

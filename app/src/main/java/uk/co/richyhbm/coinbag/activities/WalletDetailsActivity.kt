@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.MenuItem
 
 import uk.co.richyhbm.coinbag.R
 import uk.co.richyhbm.coinbag.adapters.WalletDetailsAdapter
@@ -35,6 +36,9 @@ class WalletDetailsActivity : AppCompatActivity() {
                 this.intent.extras.get(WALLET_ADDRESS).toString(),
                 Cryptocoins.valueOf(this.intent.extras.get(WALLET_TYPE).toString()))
 
+        title = wallet!!.name
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         refreshLayout = findViewById(R.id.wallet_details_swipe_refresh_layout) as SwipeRefreshLayout
         refreshLayout!!.setOnRefreshListener {
             updateAdapter()
@@ -50,6 +54,14 @@ class WalletDetailsActivity : AppCompatActivity() {
         recyclerView!!.layoutManager = layoutManager
 
         updateAdapter()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     fun updateAdapter() {

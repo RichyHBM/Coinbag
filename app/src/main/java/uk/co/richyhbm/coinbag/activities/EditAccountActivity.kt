@@ -37,6 +37,9 @@ class EditAccountActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        title = "Edit wallet"
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         assert(!intent.extras.containsKey(EDIT_WALLET_ID), {"Edit wallet only available when there is a wallet to edit"})
         val binding: ActivityAddAccountBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_account)
         binding.setVariable(BR.vm, viewModel)
@@ -166,7 +169,6 @@ class EditAccountActivity : AppCompatActivity() {
         return true
     }
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.delete_menu -> {
@@ -179,6 +181,10 @@ class EditAccountActivity : AppCompatActivity() {
                 }, {
                     finish()
                 }).execute()
+                return true
+            }
+            android.R.id.home -> {
+                finish()
                 return true
             }
             else -> return super.onOptionsItemSelected(item)

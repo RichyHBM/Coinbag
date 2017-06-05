@@ -2,12 +2,9 @@ package uk.co.richyhbm.coinbag.activities
 
 import android.content.Intent
 import android.databinding.DataBindingUtil
-import android.hardware.Camera
 import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
@@ -63,7 +60,6 @@ class AddAccountActivity : AppCompatActivity() {
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES)
         integrator.setPrompt("Scan your public key!")
         integrator.setOrientationLocked(true)
-        integrator.setCameraId(Camera.CameraInfo.CAMERA_FACING_BACK)
         integrator.setBeepEnabled(false)
         integrator.setBarcodeImageEnabled(true)
         integrator.initiateScan()
